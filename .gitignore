@@ -1,0 +1,5 @@
+# Ignore all CSV data files
+*.csv
+
+# Ignore shapefiles, which may be large
+*.shp
