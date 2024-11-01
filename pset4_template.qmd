@@ -194,6 +194,7 @@ st_hospitals2018.shape
 
 Adding the 2018 column 
 ```{python}
+#column had to be extended
 st_hospitals2018.loc[:, 'YEAR'] = 2018
 
 print(st_hospitals2018)
