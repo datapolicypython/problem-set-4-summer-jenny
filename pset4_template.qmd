@@ -1,5 +1,6 @@
 ---
-title: "Jenny and Summer PS4"
+title: "problem set IV"
+authors: "Jenny Zhong & Summer Negahdar"
 format: 
   pdf:
     keep-tex: true

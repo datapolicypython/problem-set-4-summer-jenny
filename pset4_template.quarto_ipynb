@@ -1,0 +1,491 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"problem set IV\"\n",
+        "authors: \"Jenny Zhong & Summer Negahdar\"\n",
+        "format: \n",
+        "  pdf:\n",
+        "    keep-tex: true\n",
+        "    include-in-header: \n",
+        "       text: |\n",
+        "         \\usepackage{fvextra}\n",
+        "         \\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\\\\{\\}}\n",
+        "include-before-body:\n",
+        "  text: |\n",
+        "    \\RecustomVerbatimEnvironment{verbatim}{Verbatim}{\n",
+        "      showspaces = false,\n",
+        "      showtabs = false,\n",
+        "      breaksymbolleft={},\n",
+        "      breaklines\n",
+        "    }\n",
+        "---\n",
+        "\n",
+        "\n",
+        "1. This problem set is a paired problem set.\n",
+        "2. Play paper, scissors, rock to determine who goes first. Call that person Partner 1.\n",
+        "• Partner 1 (name and cnet ID): Jenny Zhong jzhong1\n",
+        "• Partner 2 (name and cnet ID): Summer Negahdar samarneg5\n",
+        "3. Partner 1 will accept the ps4 and then share the link it creates with their partner.\n",
+        "You can only share it with one partner so you will not be able to change it after your\n",
+        "partner has accepted.\n",
+        "4. “This submission is our work alone and complies with the 30538 integrity policy.” Add\n",
+        "your initials to indicate your agreement: **SN** **JZ**\n",
+        "5. “I have uploaded the names of anyone else other than my partner and I worked with\n",
+        "on the problem set here” (1 point)\n",
+        "6. Late coins used this pset: **__** Late coins left after submission: **__**\n",
+        "7. Knit your ps4.qmd to an PDF file to make ps4.pdf,\n",
+        "• The PDF should not be more than 25 pages. Use head() and re-size figures when\n",
+        "appropriate.\n",
+        "8. (Partner 1): push ps4.qmd and ps4.pdf to your github repo.\n",
+        "9. (Partner 1): submit ps4.pdf via Gradescope. Add your partner on Gradescope.\n",
+        "10. (Partner 1): tag your submission in Gradescope\n",
+        "\n",
+        "**PS4:** Due Sat Nov 2 at 5:00PM Central. Worth 100 points. \n",
+        "We use (`*`) to indicate a problem that we think might be time consuming. \n",
+        "    \n",
+        "## Style Points (10 pts) \n",
+        "Please refer to the minilesson on code style\n",
+        "**[here](https://uchicago.zoom.us/rec/share/pG_wQ-pHTQrJTmqNn4rcrw5V194M2H2s-2jdy8oVhWHkd_yZt9o162IWurpA-fxU.BIQlSgZLRYctvzp-)**.\n",
+        "\n",
+        "## Submission Steps (10 pts)\n",
+        "1. This problem set is a paired problem set.\n",
+        "2. Play paper, scissors, rock to determine who goes first. Call that person *Partner 1*.\n",
+        "    - Partner 1 (name and cnet ID):\n",
+        "    - Partner 2 (name and cnet ID):\n",
+        "3. Partner 1 will accept the `ps4` and then share the link it creates with their partner. You can only share it with one partner so you will not be able to change it after your partner has accepted. \n",
+        "4. \"This submission is our work alone and complies with the 30538 integrity policy.\" Add your initials to indicate your agreement: \\*\\*\\_\\_\\*\\* \\*\\*\\_\\_\\*\\*\n",
+        "5. \"I have uploaded the names of anyone else other than my partner and I worked with on the problem set **[here](https://docs.google.com/forms/d/185usrCREQaUbvAXpWhChkjghdGgmAZXA3lPWpXLLsts/edit)**\"  (1 point)\n",
+        "6. Late coins used this pset: \\*\\*\\_\\_\\*\\* Late coins left after submission: \\*\\*\\_\\_\\*\\*\n",
+        "7. Knit your `ps4.qmd` to an PDF file to make `ps4.pdf`, \n",
+        "    * The PDF should not be more than 25 pages. Use `head()` and re-size figures when appropriate. \n",
+        "8. (Partner 1): push  `ps4.qmd` and `ps4.pdf` to your github repo.\n",
+        "9. (Partner 1): submit `ps4.pdf` via Gradescope. Add your partner on Gradescope.\n",
+        "10. (Partner 1): tag your submission in Gradescope\n",
+        "\n",
+        "**Important:** Repositories are for tracking code. **Do not commit the data or shapefiles to your repo.** The best way to do this is with `.gitignore`, which we have covered in class. If you do accidentally commit the data, Github has a [guide](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#removing-files-from-a-repositorys-history). The best course of action depends on whether you have pushed yet. This also means that both partners will have to download the initial raw data and any data cleaning code will need to be re-run on both partners' computers. \n",
+        "\n",
+        "## Download and explore the Provider of Services (POS) file (10 pts)\n",
+        "\n",
+        "1. The variables that I pulled are: \n",
+        "PRVDR_CTGRY_SBTYP_CD: subtype \n",
+        "Identifies the subtype of the provider, within the primary category. Used in reporting to show the breakdown of provider categories, mainly for hospitals and SNFs.\n",
+        "\n",
+        "PRVDR_CTGRY_CD: provider category \n",
+        "Identifies the type of provider participating in the Medicare/Medicaid program.\n",
+        "\n",
+        "PGM_TRMNTN_CD: termination code \n",
+        "Indicates the provider’s current termination status.\n",
+        "\n",
+        "TRMNTN_EXPRTN_DT: Termination or Expiration Date\n",
+        "Date the provider was terminated. For CLIA providers, date the laboratory's certificate was terminated or the expiration date of the current CLIA certificate.\n",
+        "\n",
+        "FAC_NAME: Facility / hospital name \n",
+        "Name of the provider certified to participate in the Medicare and/or Medicaid programs.\n",
+        "\n",
+        "ZIP_CD: Zip code \n",
+        "Five-digit ZIP code for a provider's physical address.\n",
+        "\n",
+        "CHOW_CNT: CHOW Count \n",
+        "Number of times this provider has changed ownership.\n",
+        "\n",
+        "CHOW_DT: CHOW Date\n",
+        "Effective date of the most recent change of ownership for this provider.\n",
+        "\n",
+        "CITY_NAME: City\n",
+        "City in which the provider is physically located.\n",
+        "\n",
+        "PRVDR_NUM: CMS number\n",
+        "Provider number \n",
+        "Six or ten position identification number that is assigned to a certified provider. This is the CMS Certification Number.\n",
+        "\n",
+        "2. "
+      ],
+      "id": "ea6843d9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import pandas as pd\n",
+        "import geopandas as gpd\n",
+        "import shapely\n",
+        "\n",
+        "path2016 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2016.csv'\n",
+        "pos2016 = pd.read_csv(path2016)\n",
+        "\n",
+        "pos2016.head(10)"
+      ],
+      "id": "e1684e9e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#converting to string\n",
+        "pos2016['PRVDR_CTGRY_SBTYP_CD'] = pos2016['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)\n",
+        "\n",
+        "pos2016['PRVDR_CTGRY_CD'] = pos2016['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)\n",
+        "pos2016.head()"
+      ],
+      "id": "9c59d607",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "st_hospitals2016 = pos2016[(pos2016['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2016['PRVDR_CTGRY_CD'] == '01')]\n",
+        "\n",
+        "print(st_hospitals2016.head())\n",
+        "st_hospitals2016.shape"
+      ],
+      "id": "43f934a8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "a. 7,245 hospitals are reported in this data. \n",
+        "b. [To be filled in]\n",
+        "\n",
+        "adding the year 2016"
+      ],
+      "id": "701ed804"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "st_hospitals2016.loc[:, 'YEAR'] = 2016\n",
+        "\n",
+        "print(st_hospitals2016)"
+      ],
+      "id": "4915beb1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "3. \n",
+        "for 2017: "
+      ],
+      "id": "91705c5f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#importing pos2017\n",
+        "\n",
+        "path2017 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2017.csv'\n",
+        "\n",
+        "pos2017 = pd.read_csv(path2017, encoding='latin1')"
+      ],
+      "id": "f022a6d3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#converting to string\n",
+        "pos2017['PRVDR_CTGRY_SBTYP_CD'] = pos2017['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)\n",
+        "\n",
+        "pos2017['PRVDR_CTGRY_CD'] = pos2017['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)\n",
+        "pos2017.head()"
+      ],
+      "id": "d263cc83",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#then focus on st hospitals \n",
+        "st_hospitals2017 = pos2017[(pos2017['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2017['PRVDR_CTGRY_CD'] == '01')]\n",
+        "\n",
+        "print(st_hospitals2017.head())\n",
+        "print(st_hospitals2017.tail())\n",
+        "st_hospitals2017.shape"
+      ],
+      "id": "17876e50",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Adding the 2017 column "
+      ],
+      "id": "ba10f7d9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "st_hospitals2017.loc[:, 'YEAR'] = 2017\n",
+        "\n",
+        "print(st_hospitals2017)"
+      ],
+      "id": "4a958103",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "for 2018: "
+      ],
+      "id": "f06354d6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#importing pos2018\n",
+        "\n",
+        "path2018 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2018.csv'\n",
+        "\n",
+        "pos2018 = pd.read_csv(path2018,encoding='latin1')"
+      ],
+      "id": "8860496d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#converting to string\n",
+        "pos2018['PRVDR_CTGRY_SBTYP_CD'] = pos2018['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)\n",
+        "\n",
+        "pos2018['PRVDR_CTGRY_CD'] = pos2018['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)\n",
+        "pos2018.head()"
+      ],
+      "id": "1424e180",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#then focus on st hospitals \n",
+        "st_hospitals2018 = pos2018[(pos2018['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2018['PRVDR_CTGRY_CD'] == '01')]\n",
+        "\n",
+        "print(st_hospitals2018.head())\n",
+        "print(st_hospitals2018.tail())\n",
+        "st_hospitals2018.shape"
+      ],
+      "id": "7c580d92",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Adding the 2018 column "
+      ],
+      "id": "8a7398da"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#column had to be extended\n",
+        "st_hospitals2018.loc[:, 'YEAR'] = 2018\n",
+        "\n",
+        "print(st_hospitals2018)"
+      ],
+      "id": "38885754",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "for 2019: "
+      ],
+      "id": "ee376024"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#importing pos2019\n",
+        "path2019 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2019.csv'\n",
+        "\n",
+        "pos2019 = pd.read_csv(path2019, encoding='latin1')"
+      ],
+      "id": "7301042f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "for 2019: "
+      ],
+      "id": "5c1a0069"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#importing pos2019\n",
+        "\n",
+        "path2019 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2019.csv'\n",
+        "\n",
+        "pos2019 = pd.read_csv(path2019,encoding='latin1')"
+      ],
+      "id": "8c274916",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#converting to string\n",
+        "pos2019['PRVDR_CTGRY_SBTYP_CD'] = pos2019['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)\n",
+        "\n",
+        "pos2019['PRVDR_CTGRY_CD'] = pos2019['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)\n",
+        "pos2019.head()"
+      ],
+      "id": "9db219c6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#then focus on st hospitals \n",
+        "st_hospitals2019 = pos2019[(pos2019['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2019['PRVDR_CTGRY_CD'] == '01')]\n",
+        "\n",
+        "print(st_hospitals2019.head())\n",
+        "print(st_hospitals2019.tail())\n",
+        "st_hospitals2019.shape"
+      ],
+      "id": "c80d5850",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Adding the 2019 column "
+      ],
+      "id": "a53ffc07"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "st_hospitals2019.loc[:, 'YEAR'] = 2019\n",
+        "\n",
+        "print(st_hospitals2019)"
+      ],
+      "id": "4ef054a8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**Appending them together**"
+      ],
+      "id": "5e3a21d2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "all_years_data = pd.concat([st_hospitals2016, st_hospitals2017, st_hospitals2018, st_hospitals2019], ignore_index=True)\n",
+        "\n",
+        "print(all_years_data.head())"
+      ],
+      "id": "5bed7555",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "4. \n",
+        "    a.\n",
+        "    b.\n",
+        "\n",
+        "## Identify hospital closures in POS file (15 pts) (*)\n",
+        "\n",
+        "1. \n",
+        "2. \n",
+        "3. \n",
+        "    a.\n",
+        "    b.\n",
+        "    c.\n",
+        "\n",
+        "## Download Census zip code shapefile (10 pt) \n",
+        "\n",
+        "1. \n",
+        "    a.\n",
+        "    b. \n",
+        "2. \n",
+        "\n",
+        "## Calculate zip code’s distance to the nearest hospital (20 pts) (*)\n",
+        "\n",
+        "1. \n",
+        "2. \n",
+        "3. \n",
+        "4. \n",
+        "    a.\n",
+        "    b.\n",
+        "5. \n",
+        "    a.\n",
+        "    b.\n",
+        "    c.\n",
+        "    \n",
+        "## Effects of closures on access in Texas (15 pts)\n",
+        "\n",
+        "1. \n",
+        "2. \n",
+        "3. \n",
+        "4. \n",
+        "\n",
+        "## Reflecting on the exercise (10 pts) "
+      ],
+      "id": "41a94fc4"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/samarnegahdar/Desktop/untitled folder/problem-set-4-summer-jenny/.venv/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
