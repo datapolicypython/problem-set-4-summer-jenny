@@ -117,8 +117,8 @@ pos2016.head()
 ```{python}
 st_hospitals2016 = pos2016[(pos2016['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2016['PRVDR_CTGRY_CD'] == '01')]
 
-print(st_hospitals.head())
-st_hospitals.shape
+print(st_hospitals2016.head())
+st_hospitals2016.shape
 ```
 
 a. 7,245 hospitals are reported in this data. 
@@ -126,9 +126,9 @@ b. [To be filled in]
 
 adding the year 2016
 ```{python}
-st_hospitals.loc[:, 'YEAR'] = 2016
+st_hospitals2016.loc[:, 'YEAR'] = 2016
 
-print(st_hospitals)
+print(st_hospitals2016)
 ```
 
 3. 
@@ -242,6 +242,12 @@ st_hospitals2019.loc[:, 'YEAR'] = 2019
 print(st_hospitals2019)
 ```
 
+**Appending them together**
+```{python}
+all_years_data = pd.concat([st_hospitals2016, st_hospitals2017, st_hospitals2018, st_hospitals2019], ignore_index=True)
+
+print(all_years_data.head())
+```
 
 4. 
     a.
