@@ -20,7 +20,7 @@ include-before-body:
 1. This problem set is a paired problem set.
 2. Play paper, scissors, rock to determine who goes first. Call that person Partner 1.
 • Partner 1 (name and cnet ID): Jenny Zhong jzhong1
-• Partner 2 (name and cnet ID): Summer Negahdar samarneg
+• Partner 2 (name and cnet ID): Summer Negahdar samarneg5
 3. Partner 1 will accept the ps4 and then share the link it creates with their partner.
 You can only share it with one partner so you will not be able to change it after your
 partner has accepted.
@@ -62,11 +62,193 @@ Please refer to the minilesson on code style
 
 ## Download and explore the Provider of Services (POS) file (10 pts)
 
-1. 
+1. The variables that I pulled are: 
+PRVDR_CTGRY_SBTYP_CD: subtype 
+Identifies the subtype of the provider, within the primary category. Used in reporting to show the breakdown of provider categories, mainly for hospitals and SNFs.
+
+PRVDR_CTGRY_CD: provider category 
+Identifies the type of provider participating in the Medicare/Medicaid program.
+
+PGM_TRMNTN_CD: termination code 
+Indicates the provider’s current termination status.
+
+TRMNTN_EXPRTN_DT: Termination or Expiration Date
+Date the provider was terminated. For CLIA providers, date the laboratory's certificate was terminated or the expiration date of the current CLIA certificate.
+
+FAC_NAME: Facility / hospital name 
+Name of the provider certified to participate in the Medicare and/or Medicaid programs.
+
+ZIP_CD: Zip code 
+Five-digit ZIP code for a provider's physical address.
+
+CHOW_CNT: CHOW Count 
+Number of times this provider has changed ownership.
+
+CHOW_DT: CHOW Date
+Effective date of the most recent change of ownership for this provider.
+
+CITY_NAME: City
+City in which the provider is physically located.
+
+PRVDR_NUM: CMS number
+Provider number 
+Six or ten position identification number that is assigned to a certified provider. This is the CMS Certification Number.
+
 2. 
-    a.
-    b.
+```{python}
+import pandas as pd
+import geopandas as gpd
+import shapely
+
+path2016 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2016.csv'
+pos2016 = pd.read_csv(path2016)
+
+pos2016.head(10)
+```
+
+```{python}
+#converting to string
+pos2016['PRVDR_CTGRY_SBTYP_CD'] = pos2016['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)
+
+pos2016['PRVDR_CTGRY_CD'] = pos2016['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)
+pos2016.head()
+```
+
+```{python}
+st_hospitals2016 = pos2016[(pos2016['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2016['PRVDR_CTGRY_CD'] == '01')]
+
+print(st_hospitals2016.head())
+st_hospitals2016.shape
+```
+
+a. 7,245 hospitals are reported in this data. 
+b. [To be filled in]
+
+adding the year 2016
+```{python}
+st_hospitals2016.loc[:, 'YEAR'] = 2016
+
+print(st_hospitals2016)
+```
+
 3. 
+for 2017: 
+```{python}
+#importing pos2017
+
+path2017 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2017.csv'
+
+pos2017 = pd.read_csv(path2017, encoding='latin1')
+```
+
+```{python}
+#converting to string
+pos2017['PRVDR_CTGRY_SBTYP_CD'] = pos2017['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)
+
+pos2017['PRVDR_CTGRY_CD'] = pos2017['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)
+pos2017.head()
+```
+
+```{python}
+#then focus on st hospitals 
+st_hospitals2017 = pos2017[(pos2017['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2017['PRVDR_CTGRY_CD'] == '01')]
+
+print(st_hospitals2017.head())
+print(st_hospitals2017.tail())
+st_hospitals2017.shape
+```
+
+Adding the 2017 column 
+```{python}
+st_hospitals2017.loc[:, 'YEAR'] = 2017
+
+print(st_hospitals2017)
+```
+
+
+for 2018: 
+```{python}
+#importing pos2018
+
+path2018 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2018.csv'
+
+pos2018 = pd.read_csv(path2018,encoding='latin1')
+```
+
+```{python}
+#converting to string
+pos2018['PRVDR_CTGRY_SBTYP_CD'] = pos2018['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)
+
+pos2018['PRVDR_CTGRY_CD'] = pos2018['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)
+pos2018.head()
+```
+
+```{python}
+#then focus on st hospitals 
+st_hospitals2018 = pos2018[(pos2018['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2018['PRVDR_CTGRY_CD'] == '01')]
+
+print(st_hospitals2018.head())
+print(st_hospitals2018.tail())
+st_hospitals2018.shape
+```
+
+Adding the 2018 column 
+```{python}
+#column had to be extended
+st_hospitals2018.loc[:, 'YEAR'] = 2018
+
+print(st_hospitals2018)
+```
+
+
+for 2019: 
+```{python}
+#importing pos2019
+path2019 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2019.csv'
+
+pos2019 = pd.read_csv(path2019, encoding='latin1')
+```
+
+for 2019: 
+```{python}
+#importing pos2019
+
+path2019 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2019.csv'
+
+pos2019 = pd.read_csv(path2019,encoding='latin1')
+```
+
+```{python}
+#converting to string
+pos2019['PRVDR_CTGRY_SBTYP_CD'] = pos2019['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)
+
+pos2019['PRVDR_CTGRY_CD'] = pos2019['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)
+pos2019.head()
+```
+
+```{python}
+#then focus on st hospitals 
+st_hospitals2019 = pos2019[(pos2019['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2019['PRVDR_CTGRY_CD'] == '01')]
+
+print(st_hospitals2019.head())
+print(st_hospitals2019.tail())
+st_hospitals2019.shape
+```
+
+Adding the 2019 column 
+```{python}
+st_hospitals2019.loc[:, 'YEAR'] = 2019
+
+print(st_hospitals2019)
+```
+
+**Appending them together**
+```{python}
+all_years_data = pd.concat([st_hospitals2016, st_hospitals2017, st_hospitals2018, st_hospitals2019], ignore_index=True)
+
+print(all_years_data.head())
+```
+
 4. 
     a.
     b.
