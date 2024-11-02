@@ -288,9 +288,9 @@ b. The number of unique hospitals and total observations charts are identical, w
 
 2. 
 
+<<<<<<< HEAD
 ```{python}
 import geopandas as gpd
-
 ```
 
 2. 
@@ -383,6 +383,7 @@ ax.set_title("Number of Hospitals per ZIP Code in Texas (2016)")
 ax.set_axis_off()
 plt.show()
 ```
+
 
 ## Calculate zip code’s distance to the nearest hospital (20 pts) (*)
 
