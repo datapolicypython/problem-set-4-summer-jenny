@@ -153,7 +153,7 @@ Adding the 2017 column
 ```{python}
 st_hospitals2017.loc[:, 'YEAR'] = 2017
 
-print(st_hospitals2017)
+print(st_hospitals2017.head())
 ```
 
 
@@ -171,15 +171,15 @@ pos2018 = pd.read_csv(path2018,encoding='latin1')
 pos2018['PRVDR_CTGRY_SBTYP_CD'] = pos2018['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)
 
 pos2018['PRVDR_CTGRY_CD'] = pos2018['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)
-pos2018.head()
+pos2018.head(5)
 ```
 
 ```{python}
 #then focus on st hospitals 
 st_hospitals2018 = pos2018[(pos2018['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2018['PRVDR_CTGRY_CD'] == '01')]
 
-print(st_hospitals2018.head())
-print(st_hospitals2018.tail())
+print(st_hospitals2018.head(5))
+print(st_hospitals2018.tail(5))
 st_hospitals2018.shape
 ```
 
@@ -188,7 +188,7 @@ Adding the 2018 column
 #column had to be extended
 st_hospitals2018.loc[:, 'YEAR'] = 2018
 
-print(st_hospitals2018)
+print(st_hospitals2018.head(5))
 ```
 
 
@@ -214,15 +214,15 @@ pos2019 = pd.read_csv(path2019,encoding='latin1')
 pos2019['PRVDR_CTGRY_SBTYP_CD'] = pos2019['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)
 
 pos2019['PRVDR_CTGRY_CD'] = pos2019['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)
-pos2019.head()
+pos2019.head(5)
 ```
 
 ```{python}
 #then focus on st hospitals 
 st_hospitals2019 = pos2019[(pos2019['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2019['PRVDR_CTGRY_CD'] == '01')]
 
-print(st_hospitals2019.head())
-print(st_hospitals2019.tail())
+print(st_hospitals2019.head(5))
+print(st_hospitals2019.tail(5))
 st_hospitals2019.shape
 ```
 
@@ -283,9 +283,25 @@ b. The number of unique hospitals and total observations charts are identical, w
 ## Download Census zip code shapefile (10 pt) 
 
 1. 
-    a.
+    a. There are five types of file types here. 
+**.shp (shape file)**: file contains the geometric shapes. It stores the spatial coordinates and shapes of objects like points, lines or polygons. 
+**.shx (shape index format)**: file is an index of the geometry in the .shp file, and provides quick access to the geometric shapes. 
+**.dbf (attribute format)**: file contains attribute data in tabular format, with each row corresponding to a feature and each column containing attributes associated with that feature. 
+**.prj (projection format)**: file contains information about the coordinate sysetm and projection, and defines how shapes are mapped onto Earth's surface. 
+**.xml (metadata format)**: file contains metadata, contains descriptive information about dataset such as source, creation date, projection dates. 
+
     b. 
+| File Extension | Size (MB)  |
+|----------------|------------|
+| .shp           | 837.5      |
+| .dbf           | 6.4        |
+| .prj           | 0.000165   |
+| .shx           | 0.000265   |
+| .xml           | 0.016      |
+
 2. 
+
+
 
 ## Calculate zip code’s distance to the nearest hospital (20 pts) (*)
 
