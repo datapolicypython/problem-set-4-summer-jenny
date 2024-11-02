@@ -439,7 +439,7 @@ import os
 import geopandas as gpd
 
 # Set environment variable to attempt SHX file restoration
-os.environ["SHAPE_RESTORE_SHX"] = "YES"
+co
 
 shapefile_path = "/Users/samarnegahdar/Desktop/untitled folder/problem-set-4-summer-jenny/gz_2010_us_860_00_500k.shp"
 
