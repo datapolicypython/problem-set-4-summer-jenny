@@ -63,42 +63,32 @@ Please refer to the minilesson on code style
 ## Download and explore the Provider of Services (POS) file (10 pts)
 
 1. The variables that I pulled are: 
-PRVDR_CTGRY_SBTYP_CD: subtype 
-Identifies the subtype of the provider, within the primary category. Used in reporting to show the breakdown of provider categories, mainly for hospitals and SNFs.
+PRVDR_CTGRY_SBTYP_CD: subtype. Identifies the subtype of the provider, within the primary category. Used in reporting to show the breakdown of provider categories, mainly for hospitals and SNFs.
 
-PRVDR_CTGRY_CD: provider category 
-Identifies the type of provider participating in the Medicare/Medicaid program.
+PRVDR_CTGRY_CD: provider category. Identifies the type of provider participating in the Medicare/Medicaid program.
 
-PGM_TRMNTN_CD: termination code 
-Indicates the provider’s current termination status.
+PGM_TRMNTN_CD: termination code. Indicates the provider’s current termination status.
 
-TRMNTN_EXPRTN_DT: Termination or Expiration Date
-Date the provider was terminated. For CLIA providers, date the laboratory's certificate was terminated or the expiration date of the current CLIA certificate.
+TRMNTN_EXPRTN_DT: Termination or Expiration Date. Date the provider was terminated. For CLIA providers, date the laboratory's certificate was terminated or the expiration date of the current CLIA certificate.
 
-FAC_NAME: Facility / hospital name 
-Name of the provider certified to participate in the Medicare and/or Medicaid programs.
+FAC_NAME: Facility / hospital name. Name of the provider certified to participate in the Medicare and/or Medicaid programs.
 
-ZIP_CD: Zip code 
-Five-digit ZIP code for a provider's physical address.
+ZIP_CD: Zip code. Five-digit ZIP code for a provider's physical address.
 
-CHOW_CNT: CHOW Count 
-Number of times this provider has changed ownership.
+CHOW_CNT: CHOW Count. Number of times this provider has changed ownership.
 
-CHOW_DT: CHOW Date
-Effective date of the most recent change of ownership for this provider.
+CHOW_DT: CHOW Date. Effective date of the most recent change of ownership for this provider.
 
-CITY_NAME: City
-City in which the provider is physically located.
+CITY_NAME: City. City in which the provider is physically located.
 
-PRVDR_NUM: CMS number
-Provider number 
-Six or ten position identification number that is assigned to a certified provider. This is the CMS Certification Number.
+PRVDR_NUM: CMS number/Provider number. Six or ten position identification number that is assigned to a certified provider. This is the CMS Certification Number.
 
 2. 
 ```{python}
 import pandas as pd
 import geopandas as gpd
 import shapely
+import altair as alt
 
 path2016 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2016.csv'
 pos2016 = pd.read_csv(path2016)
@@ -122,7 +112,8 @@ st_hospitals2016.shape
 ```
 
 a. 7,245 hospitals are reported in this data. 
-b. [To be filled in]
+
+b. Compared to sources that provide counts of short-term hospitals in the US, such as the Kaiser Family Foundation, we know that there were nearly 5,000 short term, acute care hospitals in the US in recent years (half of which are rural and half urban). This could be higher than the reported number because of definition differences, for example the dataset could define short-term hospitals different to the Kaiser Family Foundation's definition. 
 
 adding the year 2016
 ```{python}
@@ -247,11 +238,38 @@ print(st_hospitals2019)
 all_years_data = pd.concat([st_hospitals2016, st_hospitals2017, st_hospitals2018, st_hospitals2019], ignore_index=True)
 
 print(all_years_data.head())
+all_years_data.shape
+```
+
+**Plotting by observations**
+```{python}
+observations_by_year = all_years_data.groupby('YEAR').size().reset_index(name='count')
+
+chart13 = alt.Chart(observations_by_year).mark_bar().encode(
+    x=alt.X('YEAR:O', title='Year'),
+    y=alt.Y('count:Q', title='Number of Observations')  
+).properties(
+    title='Number of Observations by Year'
+)
+chart13.display()
 ```
 
 4. 
     a.
-    b.
+```{python}
+unique_hospitals_by_year = all_years_data.groupby('YEAR')['PRVDR_NUM'].nunique().reset_index(name='unique_count')
+
+unique_hospital_chart = alt.Chart(unique_hospitals_by_year).mark_bar().encode(
+    x=alt.X('YEAR:O', title='Year'),
+    y=alt.Y('unique_count:Q', title='Number of Unique Hospitals') 
+).properties(
+    title='Number of Unique Hospitals by Year'
+)
+
+unique_hospital_chart.display()
+```
+
+b. The number of unique hospitals and total observations charts are identical, which means that each hospital has only one record in the dataset for each year. The dataset is structured as a snapshot of unique hospitals, with no intra-year variations or multiple records per hospital within each year. 
 
 ## Identify hospital closures in POS file (15 pts) (*)
 
