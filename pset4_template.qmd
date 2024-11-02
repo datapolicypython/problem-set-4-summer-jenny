@@ -18,39 +18,8 @@ include-before-body:
     }
 ---
 
-1. This problem set is a paired problem set.
-2. Play paper, scissors, rock to determine who goes first. Call that person Partner 1.
-• Partner 1 (name and cnet ID): Jenny Zhong jzhong1
-• Partner 2 (name and cnet ID): Summer Negahdar samarneg5
-3. Partner 1 will accept the ps4 and then share the link it creates with their partner.
-You can only share it with one partner so you will not be able to change it after your
-partner has accepted.
-4. “This submission is our work alone and complies with the 30538 integrity policy.” Add
-your initials to indicate your agreement: **SN** **JZ**
-5. “I have uploaded the names of anyone else other than my partner and I worked with
-on the problem set here” (1 point)
-6. Late coins used this pset: **__** Late coins left after submission: **__**
-7. Knit your ps4.qmd to an PDF file to make ps4.pdf,
-• The PDF should not be more than 25 pages. Use head() and re-size figures when
-appropriate.
-8. (Partner 1): push ps4.qmd and ps4.pdf to your github repo.
-9. (Partner 1): submit ps4.pdf via Gradescope. Add your partner on Gradescope.
-10. (Partner 1): tag your submission in Gradescope
+"This submission is our work alone and complies with the 30538 integrity policy." Add your initials to indicate your agreement: **SN** **JZ**
 
-**PS4:** Due Sat Nov 2 at 5:00PM Central. Worth 100 points. 
-We use (`*`) to indicate a problem that we think might be time consuming. 
-    
-## Style Points (10 pts) 
-Please refer to the minilesson on code style
-**[here](https://uchicago.zoom.us/rec/share/pG_wQ-pHTQrJTmqNn4rcrw5V194M2H2s-2jdy8oVhWHkd_yZt9o162IWurpA-fxU.BIQlSgZLRYctvzp-)**.
-
-## Submission Steps (10 pts)
-1. This problem set is a paired problem set.
-2. Play paper, scissors, rock to determine who goes first. Call that person *Partner 1*.
-    - Partner 1 (name and cnet ID):
-    - Partner 2 (name and cnet ID):
-3. Partner 1 will accept the `ps4` and then share the link it creates with their partner. You can only share it with one partner so you will not be able to change it after your partner has accepted. 
-4. "This submission is our work alone and complies with the 30538 integrity policy." Add your initials to indicate your agreement: \*\*\_\_\*\* \*\*\_\_\*\*
 5. "I have uploaded the names of anyone else other than my partner and I worked with on the problem set **[here](https://docs.google.com/forms/d/185usrCREQaUbvAXpWhChkjghdGgmAZXA3lPWpXLLsts/edit)**"  (1 point)
 6. Late coins used this pset: \*\*\_\_\*\* Late coins left after submission: \*\*\_\_\*\*
 7. Knit your `ps4.qmd` to an PDF file to make `ps4.pdf`, 
@@ -58,10 +27,9 @@ Please refer to the minilesson on code style
 8. (Partner 1): push  `ps4.qmd` and `ps4.pdf` to your github repo.
 9. (Partner 1): submit `ps4.pdf` via Gradescope. Add your partner on Gradescope.
 10. (Partner 1): tag your submission in Gradescope
+ 
 
-**Important:** Repositories are for tracking code. **Do not commit the data or shapefiles to your repo.** The best way to do this is with `.gitignore`, which we have covered in class. If you do accidentally commit the data, Github has a [guide](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#removing-files-from-a-repositorys-history). The best course of action depends on whether you have pushed yet. This also means that both partners will have to download the initial raw data and any data cleaning code will need to be re-run on both partners' computers. 
-
-## Download and explore the Provider of Services (POS) file (10 pts)
+## Download and explore the Provider of Services (POS) file
 
 1. The variables that I pulled are: 
 PRVDR_CTGRY_SBTYP_CD: subtype 
@@ -100,11 +68,10 @@ Six or ten position identification number that is assigned to a certified provid
 import pandas as pd
 import geopandas as gpd
 import shapely
-
-path2016 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2016.csv'
-pos2016 = pd.read_csv(path2016)
-
-pos2016.head(10)
+import os
+os.chdir("/Users/samarnegahdar/Desktop/untitled folder/problem-set-4-summer-jenny")
+pos2016 = pd.read_csv("pos2016.csv")
+print(pos2016.head(10))
 ```
 
 ```{python}
@@ -128,7 +95,6 @@ b. [To be filled in]
 adding the year 2016
 ```{python}
 st_hospitals2016.loc[:, 'YEAR'] = 2016
-
 print(st_hospitals2016)
 ```
 
@@ -136,22 +102,19 @@ print(st_hospitals2016)
 for 2017: 
 ```{python}
 #importing pos2017
-
-path2017 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2017.csv'
-
-pos2017 = pd.read_csv(path2017, encoding='latin1')
+pos2017 = pd.read_csv("pos2017.csv", encoding='latin1')
 ```
 
 ```{python}
 #converting to string
 pos2017['PRVDR_CTGRY_SBTYP_CD'] = pos2017['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)
 
-pos2017['PRVDR_CTGRY_CD'] = pos2017['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)
+pos2017['PRVDR_CTGRY_CD'] = pos2017['PRVDR_CTGRY_CD'].astype(str).str.zfill(2) ##filling numbers with a zero before integer
 pos2017.head()
 ```
 
 ```{python}
-#then focus on st hospitals 
+#then focusing on short term hospitals 
 st_hospitals2017 = pos2017[(pos2017['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2017['PRVDR_CTGRY_CD'] == '01')]
 
 print(st_hospitals2017.head())
@@ -170,10 +133,7 @@ print(st_hospitals2017)
 for 2018: 
 ```{python}
 #importing pos2018
-
-path2018 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2018.csv'
-
-pos2018 = pd.read_csv(path2018,encoding='latin1')
+pos2018 = pd.read_csv('pos2018.csv', encoding='latin1')
 ```
 
 ```{python}
@@ -205,18 +165,7 @@ print(st_hospitals2018)
 for 2019: 
 ```{python}
 #importing pos2019
-path2019 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2019.csv'
-
-pos2019 = pd.read_csv(path2019, encoding='latin1')
-```
-
-for 2019: 
-```{python}
-#importing pos2019
-
-path2019 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2019.csv'
-
-pos2019 = pd.read_csv(path2019,encoding='latin1')
+pos2019 = pd.read_csv('pos2019.csv', encoding='latin1')
 ```
 
 ```{python}
@@ -240,7 +189,7 @@ Adding the 2019 column
 ```{python}
 st_hospitals2019.loc[:, 'YEAR'] = 2019
 
-print(st_hospitals2019)
+print(st_hospitals2019.head(5))
 ```
 
 **Appending them together**
@@ -252,16 +201,233 @@ print(all_years_data.head())
 
 4. 
     a.
-    b.
+   
+    b. 
 
 ## Identify hospital closures in POS file (15 pts) (*)
 
+```{python}
+unique_termination_codes = all_years_data['PGM_TRMNTN_CD'].unique()
+print(unique_termination_codes)
+```
+
 1. 
+
+```{python}
+# Ensure PGM_TRMNTN_CD is treated as a string
+all_years_data['PGM_TRMNTN_CD'] = all_years_data['PGM_TRMNTN_CD'].astype(str)
+
+# Fill missing values in the PGM_TRMNTN_CD column with '1'
+all_years_data['PGM_TRMNTN_CD'] = all_years_data['PGM_TRMNTN_CD'].fillna('1')
+
+# Verify that missing values have been filled
+print("Check for missing values in PGM_TRMNTN_CD column after filling:")
+print(all_years_data['PGM_TRMNTN_CD'].isnull().sum())  # Should output 0 if no missing values remain
+
+# List to store suspected closures
+suspected_closures = []
+
+# Filter for hospitals that were active in 2016
+active_2016 = all_years_data[(all_years_data['YEAR'] == 2016) & (all_years_data['PGM_TRMNTN_CD'] == '0')]
+
+# Loop through each hospital active in 2016
+for _, hospital in active_2016.iterrows():
+    facility_name = hospital['FAC_NAME']
+    zip_code = hospital['ZIP_CD']
+    
+    # Check if the hospital is closed in 2019 with any termination code from ['01', '02', '03', '04']
+    closed_2019 = all_years_data[
+        (all_years_data['FAC_NAME'] == facility_name) &
+        (all_years_data['ZIP_CD'] == zip_code) &
+        (all_years_data['YEAR'] == 2019) &
+        (all_years_data['PGM_TRMNTN_CD'].isin(['1', '2', '3', '4']))
+    ]
+    
+    # Retrieve termination codes for 2018 and 2017
+    termination_code_2018 = all_years_data[
+        (all_years_data['FAC_NAME'] == facility_name) &
+        (all_years_data['ZIP_CD'] == zip_code) &
+        (all_years_data['YEAR'] == 2018)
+    ]['PGM_TRMNTN_CD'].iloc[0] if not all_years_data[
+        (all_years_data['FAC_NAME'] == facility_name) &
+        (all_years_data['ZIP_CD'] == zip_code) &
+        (all_years_data['YEAR'] == 2018)
+    ].empty else None
+
+    termination_code_2017 = all_years_data[
+        (all_years_data['FAC_NAME'] == facility_name) &
+        (all_years_data['ZIP_CD'] == zip_code) &
+        (all_years_data['YEAR'] == 2017)
+    ]['PGM_TRMNTN_CD'].iloc[0] if not all_years_data[
+        (all_years_data['FAC_NAME'] == facility_name) &
+        (all_years_data['ZIP_CD'] == zip_code) &
+        (all_years_data['YEAR'] == 2017)
+    ].empty else None
+    
+    # If the hospital is closed in 2019, add it to the suspected closures with 2018 and 2017 termination codes
+    if not closed_2019.empty:
+        suspected_closures.append({
+            'FAC_NAME': facility_name,
+            'ZIP_CD': zip_code,
+            'year_of_closure': 2019,
+            'PGM_TRMNTN_CD_2018': termination_code_2018,
+            'PGM_TRMNTN_CD_2017': termination_code_2017
+        })
+
+# Convert to DataFrame and remove duplicates to ensure unique hospitals
+suspected_closures_df = pd.DataFrame(suspected_closures).drop_duplicates(subset=['FAC_NAME', 'ZIP_CD'])
+
+# Display the count of unique suspected closures
+num_unique_suspected_closures = len(suspected_closures_df)
+print(f"Number of unique hospitals suspected to have closed by 2019: {num_unique_suspected_closures}")
+```
+
+
 2. 
+
+```{python}
+print(suspected_closures_df.head(10))
+```
+
 3. 
     a.
+
+```{python}
+# Lists to store final classifications
+properly_closed_hospitals = []
+merge_hospitals = []
+
+# Iterate over each hospital in suspected_closures_df
+for _, hospital in suspected_closures_df.iterrows():
+    facility_name = hospital['FAC_NAME']
+    zip_code = hospital['ZIP_CD']
+    termination_code_2018 = hospital['PGM_TRMNTN_CD_2018']
+    termination_code_2017 = hospital['PGM_TRMNTN_CD_2017']
+    
+    # Step 1: Check the 2018 termination code
+    if termination_code_2018 != '0':
+        # If 2018 termination code is not 0, classify as properly closed
+        properly_closed_hospitals.append({
+            'FAC_NAME': facility_name,
+            'ZIP_CD': zip_code,
+            'PGM_TRMNTN_CD_2018': termination_code_2018,
+            'PGM_TRMNTN_CD_2017': termination_code_2017
+        })
+    else:
+        # Step 2: Check the 2017 termination code if 2018 is 0.0
+        if termination_code_2017 == '0':
+            # If 2017 is also 0, classify as properly closed
+            properly_closed_hospitals.append({
+                'FAC_NAME': facility_name,
+                'ZIP_CD': zip_code,
+                'PGM_TRMNTN_CD_2018': termination_code_2018,
+                'PGM_TRMNTN_CD_2017': termination_code_2017
+            })
+        else:
+            # Otherwise, classify as a potential merger
+            merge_hospitals.append({
+                'FAC_NAME': facility_name,
+                'ZIP_CD': zip_code,
+                'PGM_TRMNTN_CD_2018': termination_code_2018,
+                'PGM_TRMNTN_CD_2017': termination_code_2017
+            })
+
+# Convert results to DataFrames for inspection
+properly_closed_hospitals_df = pd.DataFrame(properly_closed_hospitals)
+merge_hospitals_df = pd.DataFrame(merge_hospitals)
+
+# Display results
+print("Properly closed hospitals:")
+print(properly_closed_hospitals_df)
+
+print("\nHospitals suspected of merger:")
+print(merge_hospitals_df)
+
+# Number of properly closed hospitals
+num_properly_closed = properly_closed_hospitals_df.shape['0']
+print(f"Number of properly closed hospitals: {num_properly_closed}")
+
+# Number of suspected mergers
+num_suspected_mergers = merge_hospitals_df.shape['0']
+print(f"Number of suspected mergers: {num_suspected_mergers}")
+```
+
+
+```{python}
+# Initialize lists to store properly closed hospitals and suspected mergers
+properly_closed_hospitals = []
+merge_hospitals = []
+
+# Iterate over each hospital in suspected_closures_df
+for _, hospital in suspected_closures_df.iterrows():
+    facility_name = hospital['FAC_NAME']
+    zip_code = hospital['ZIP_CD']
+    
+    # Filter for this hospital's data in all_years_data for the years 2017 and 2018
+    hospital_data = all_years_data[
+        (all_years_data['FAC_NAME'] == facility_name) & 
+        (all_years_data['ZIP_CD'] == zip_code) &
+        (all_years_data['YEAR'].isin([2017, 2018]))
+    ]
+
+    # Get the termination codes for 2018 and 2017, defaulting to "1" if the year is missing
+    termination_2018 = hospital_data[hospital_data['YEAR'] == 2018]['PGM_TRMNTN_CD'].iloc[0] if not hospital_data[hospital_data['YEAR'] == 2018].empty else '1'
+    termination_2017 = hospital_data[hospital_data['YEAR'] == 2017]['PGM_TRMNTN_CD'].iloc[0] if not hospital_data[hospital_data['YEAR'] == 2017].empty else '1'
+
+    # Classification logic as per the description
+    if termination_2018 != '0':
+        # Properly closed if terminated in 2018 (code other than "0")
+        properly_closed_hospitals.append({
+            'FAC_NAME': facility_name,
+            'ZIP_CD': zip_code,
+            'PGM_TRMNTN_CD_2017': termination_2017,
+            'PGM_TRMNTN_CD_2018': termination_2018
+        })
+    elif termination_2018 == '0':
+        # If active in 2018, check 2017 status
+        if termination_2017 == '0':
+            # Properly closed if also active in 2017
+            properly_closed_hospitals.append({
+                'FAC_NAME': facility_name,
+                'ZIP_CD': zip_code,
+                'PGM_TRMNTN_CD_2017': termination_2017,
+                'PGM_TRMNTN_CD_2018': termination_2018
+            })
+        else:
+            # Otherwise, add to suspected mergers
+            merge_hospitals.append({
+                'FAC_NAME': facility_name,
+                'ZIP_CD': zip_code,
+                'PGM_TRMNTN_CD_2017': termination_2017,
+                'PGM_TRMNTN_CD_2018': termination_2018
+            })
+
+# Convert results to DataFrames for inspection
+properly_closed_hospitals_df = pd.DataFrame(properly_closed_hospitals)
+merge_hospitals_df = pd.DataFrame(merge_hospitals)
+# Number of properly closed hospitals
+num_properly_closed = properly_closed_hospitals_df.shape[0]
+print(f"Number of properly closed hospitals: {num_properly_closed}")
+
+# Number of suspected mergers
+num_suspected_mergers = merge_hospitals_df.shape[0]
+print(f"Number of suspected mergers: {num_suspected_mergers}")
+```
+
+There are no potential merged hospitals!
+
+
+    a. there are no merged hospitals!
     b.
-    c.
+
+ ```{python}
+    # Sort the properly closed hospitals by FAC_NAME and display the first 10 rows
+sorted_properly_closed_hospitals = properly_closed_hospitals_df.sort_values(by='FAC_NAME').head(10)
+
+# Display the sorted list
+print("First 10 corrected hospital closures sorted by name:")
+print(sorted_properly_closed_hospitals)
+```
 
 ## Download Census zip code shapefile (10 pt) 
 

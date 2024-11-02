@@ -25,39 +25,8 @@
         "---\n",
         "\n",
         "\n",
-        "1. This problem set is a paired problem set.\n",
-        "2. Play paper, scissors, rock to determine who goes first. Call that person Partner 1.\n",
-        "• Partner 1 (name and cnet ID): Jenny Zhong jzhong1\n",
-        "• Partner 2 (name and cnet ID): Summer Negahdar samarneg5\n",
-        "3. Partner 1 will accept the ps4 and then share the link it creates with their partner.\n",
-        "You can only share it with one partner so you will not be able to change it after your\n",
-        "partner has accepted.\n",
-        "4. “This submission is our work alone and complies with the 30538 integrity policy.” Add\n",
-        "your initials to indicate your agreement: **SN** **JZ**\n",
-        "5. “I have uploaded the names of anyone else other than my partner and I worked with\n",
-        "on the problem set here” (1 point)\n",
-        "6. Late coins used this pset: **__** Late coins left after submission: **__**\n",
-        "7. Knit your ps4.qmd to an PDF file to make ps4.pdf,\n",
-        "• The PDF should not be more than 25 pages. Use head() and re-size figures when\n",
-        "appropriate.\n",
-        "8. (Partner 1): push ps4.qmd and ps4.pdf to your github repo.\n",
-        "9. (Partner 1): submit ps4.pdf via Gradescope. Add your partner on Gradescope.\n",
-        "10. (Partner 1): tag your submission in Gradescope\n",
+        "\"This submission is our work alone and complies with the 30538 integrity policy.\" Add your initials to indicate your agreement: **SN** **JZ**\n",
         "\n",
-        "**PS4:** Due Sat Nov 2 at 5:00PM Central. Worth 100 points. \n",
-        "We use (`*`) to indicate a problem that we think might be time consuming. \n",
-        "    \n",
-        "## Style Points (10 pts) \n",
-        "Please refer to the minilesson on code style\n",
-        "**[here](https://uchicago.zoom.us/rec/share/pG_wQ-pHTQrJTmqNn4rcrw5V194M2H2s-2jdy8oVhWHkd_yZt9o162IWurpA-fxU.BIQlSgZLRYctvzp-)**.\n",
-        "\n",
-        "## Submission Steps (10 pts)\n",
-        "1. This problem set is a paired problem set.\n",
-        "2. Play paper, scissors, rock to determine who goes first. Call that person *Partner 1*.\n",
-        "    - Partner 1 (name and cnet ID):\n",
-        "    - Partner 2 (name and cnet ID):\n",
-        "3. Partner 1 will accept the `ps4` and then share the link it creates with their partner. You can only share it with one partner so you will not be able to change it after your partner has accepted. \n",
-        "4. \"This submission is our work alone and complies with the 30538 integrity policy.\" Add your initials to indicate your agreement: \\*\\*\\_\\_\\*\\* \\*\\*\\_\\_\\*\\*\n",
         "5. \"I have uploaded the names of anyone else other than my partner and I worked with on the problem set **[here](https://docs.google.com/forms/d/185usrCREQaUbvAXpWhChkjghdGgmAZXA3lPWpXLLsts/edit)**\"  (1 point)\n",
         "6. Late coins used this pset: \\*\\*\\_\\_\\*\\* Late coins left after submission: \\*\\*\\_\\_\\*\\*\n",
         "7. Knit your `ps4.qmd` to an PDF file to make `ps4.pdf`, \n",
@@ -65,10 +34,9 @@
         "8. (Partner 1): push  `ps4.qmd` and `ps4.pdf` to your github repo.\n",
         "9. (Partner 1): submit `ps4.pdf` via Gradescope. Add your partner on Gradescope.\n",
         "10. (Partner 1): tag your submission in Gradescope\n",
+        " \n",
         "\n",
-        "**Important:** Repositories are for tracking code. **Do not commit the data or shapefiles to your repo.** The best way to do this is with `.gitignore`, which we have covered in class. If you do accidentally commit the data, Github has a [guide](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#removing-files-from-a-repositorys-history). The best course of action depends on whether you have pushed yet. This also means that both partners will have to download the initial raw data and any data cleaning code will need to be re-run on both partners' computers. \n",
-        "\n",
-        "## Download and explore the Provider of Services (POS) file (10 pts)\n",
+        "## Download and explore the Provider of Services (POS) file\n",
         "\n",
         "1. The variables that I pulled are: \n",
         "PRVDR_CTGRY_SBTYP_CD: subtype \n",
@@ -104,7 +72,7 @@
         "\n",
         "2. "
       ],
-      "id": "ea6843d9"
+      "id": "c228f0d3"
     },
     {
       "cell_type": "code",
@@ -113,13 +81,12 @@
         "import pandas as pd\n",
         "import geopandas as gpd\n",
         "import shapely\n",
-        "\n",
-        "path2016 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2016.csv'\n",
-        "pos2016 = pd.read_csv(path2016)\n",
-        "\n",
-        "pos2016.head(10)"
+        "import os\n",
+        "os.chdir(\"/Users/samarnegahdar/Desktop/untitled folder/problem-set-4-summer-jenny\")\n",
+        "pos2016 = pd.read_csv(\"pos2016.csv\")\n",
+        "print(pos2016.head(10))"
       ],
-      "id": "e1684e9e",
+      "id": "bc0ef4b5",
       "execution_count": null,
       "outputs": []
     },
@@ -133,7 +100,7 @@
         "pos2016['PRVDR_CTGRY_CD'] = pos2016['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)\n",
         "pos2016.head()"
       ],
-      "id": "9c59d607",
+      "id": "efafad43",
       "execution_count": null,
       "outputs": []
     },
@@ -146,7 +113,7 @@
         "print(st_hospitals2016.head())\n",
         "st_hospitals2016.shape"
       ],
-      "id": "43f934a8",
+      "id": "98411673",
       "execution_count": null,
       "outputs": []
     },
@@ -159,17 +126,16 @@
         "\n",
         "adding the year 2016"
       ],
-      "id": "701ed804"
+      "id": "da0e8fb4"
     },
     {
       "cell_type": "code",
       "metadata": {},
       "source": [
         "st_hospitals2016.loc[:, 'YEAR'] = 2016\n",
-        "\n",
         "print(st_hospitals2016)"
       ],
-      "id": "4915beb1",
+      "id": "d0abb35d",
       "execution_count": null,
       "outputs": []
     },
@@ -180,19 +146,16 @@
         "3. \n",
         "for 2017: "
       ],
-      "id": "91705c5f"
+      "id": "86db58e0"
     },
     {
       "cell_type": "code",
       "metadata": {},
       "source": [
         "#importing pos2017\n",
-        "\n",
-        "path2017 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2017.csv'\n",
-        "\n",
-        "pos2017 = pd.read_csv(path2017, encoding='latin1')"
+        "pos2017 = pd.read_csv(\"pos2017.csv\", encoding='latin1')"
       ],
-      "id": "f022a6d3",
+      "id": "5c8a8138",
       "execution_count": null,
       "outputs": []
     },
@@ -203,10 +166,10 @@
         "#converting to string\n",
         "pos2017['PRVDR_CTGRY_SBTYP_CD'] = pos2017['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)\n",
         "\n",
-        "pos2017['PRVDR_CTGRY_CD'] = pos2017['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)\n",
+        "pos2017['PRVDR_CTGRY_CD'] = pos2017['PRVDR_CTGRY_CD'].astype(str).str.zfill(2) ##filling numbers with a zero before integer\n",
         "pos2017.head()"
       ],
-      "id": "d263cc83",
+      "id": "b96a2f86",
       "execution_count": null,
       "outputs": []
     },
@@ -214,14 +177,14 @@
       "cell_type": "code",
       "metadata": {},
       "source": [
-        "#then focus on st hospitals \n",
+        "#then focusing on short term hospitals \n",
         "st_hospitals2017 = pos2017[(pos2017['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2017['PRVDR_CTGRY_CD'] == '01')]\n",
         "\n",
         "print(st_hospitals2017.head())\n",
         "print(st_hospitals2017.tail())\n",
         "st_hospitals2017.shape"
       ],
-      "id": "17876e50",
+      "id": "c748dc35",
       "execution_count": null,
       "outputs": []
     },
@@ -231,7 +194,7 @@
       "source": [
         "Adding the 2017 column "
       ],
-      "id": "ba10f7d9"
+      "id": "2c82632d"
     },
     {
       "cell_type": "code",
@@ -241,7 +204,7 @@
         "\n",
         "print(st_hospitals2017)"
       ],
-      "id": "4a958103",
+      "id": "9b3f73b2",
       "execution_count": null,
       "outputs": []
     },
@@ -251,19 +214,16 @@
       "source": [
         "for 2018: "
       ],
-      "id": "f06354d6"
+      "id": "9a8d243a"
     },
     {
       "cell_type": "code",
       "metadata": {},
       "source": [
         "#importing pos2018\n",
-        "\n",
-        "path2018 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2018.csv'\n",
-        "\n",
-        "pos2018 = pd.read_csv(path2018,encoding='latin1')"
+        "pos2018 = pd.read_csv('pos2018.csv', encoding='latin1')"
       ],
-      "id": "8860496d",
+      "id": "103770a9",
       "execution_count": null,
       "outputs": []
     },
@@ -277,7 +237,7 @@
         "pos2018['PRVDR_CTGRY_CD'] = pos2018['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)\n",
         "pos2018.head()"
       ],
-      "id": "1424e180",
+      "id": "45d6639e",
       "execution_count": null,
       "outputs": []
     },
@@ -292,7 +252,7 @@
         "print(st_hospitals2018.tail())\n",
         "st_hospitals2018.shape"
       ],
-      "id": "7c580d92",
+      "id": "4f560428",
       "execution_count": null,
       "outputs": []
     },
@@ -302,7 +262,7 @@
       "source": [
         "Adding the 2018 column "
       ],
-      "id": "8a7398da"
+      "id": "f5627f09"
     },
     {
       "cell_type": "code",
@@ -313,7 +273,7 @@
         "\n",
         "print(st_hospitals2018)"
       ],
-      "id": "38885754",
+      "id": "112ab89f",
       "execution_count": null,
       "outputs": []
     },
@@ -323,40 +283,16 @@
       "source": [
         "for 2019: "
       ],
-      "id": "ee376024"
+      "id": "bebb4e7b"
     },
     {
       "cell_type": "code",
       "metadata": {},
       "source": [
         "#importing pos2019\n",
-        "path2019 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2019.csv'\n",
-        "\n",
-        "pos2019 = pd.read_csv(path2019, encoding='latin1')"
+        "pos2019 = pd.read_csv('pos2019.csv', encoding='latin1')"
       ],
-      "id": "7301042f",
-      "execution_count": null,
-      "outputs": []
-    },
-    {
-      "cell_type": "markdown",
-      "metadata": {},
-      "source": [
-        "for 2019: "
-      ],
-      "id": "5c1a0069"
-    },
-    {
-      "cell_type": "code",
-      "metadata": {},
-      "source": [
-        "#importing pos2019\n",
-        "\n",
-        "path2019 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2019.csv'\n",
-        "\n",
-        "pos2019 = pd.read_csv(path2019,encoding='latin1')"
-      ],
-      "id": "8c274916",
+      "id": "5990cc1f",
       "execution_count": null,
       "outputs": []
     },
@@ -370,7 +306,7 @@
         "pos2019['PRVDR_CTGRY_CD'] = pos2019['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)\n",
         "pos2019.head()"
       ],
-      "id": "9db219c6",
+      "id": "bab6977d",
       "execution_count": null,
       "outputs": []
     },
@@ -385,7 +321,7 @@
         "print(st_hospitals2019.tail())\n",
         "st_hospitals2019.shape"
       ],
-      "id": "c80d5850",
+      "id": "92e75808",
       "execution_count": null,
       "outputs": []
     },
@@ -395,7 +331,7 @@
       "source": [
         "Adding the 2019 column "
       ],
-      "id": "a53ffc07"
+      "id": "4dc4c1a5"
     },
     {
       "cell_type": "code",
@@ -403,9 +339,9 @@
       "source": [
         "st_hospitals2019.loc[:, 'YEAR'] = 2019\n",
         "\n",
-        "print(st_hospitals2019)"
+        "print(st_hospitals2019.head(5))"
       ],
-      "id": "4ef054a8",
+      "id": "f5855272",
       "execution_count": null,
       "outputs": []
     },
@@ -415,7 +351,7 @@
       "source": [
         "**Appending them together**"
       ],
-      "id": "5e3a21d2"
+      "id": "8306837a"
     },
     {
       "cell_type": "code",
@@ -425,7 +361,7 @@
         "\n",
         "print(all_years_data.head())"
       ],
-      "id": "5bed7555",
+      "id": "8fae9026",
       "execution_count": null,
       "outputs": []
     },
@@ -434,15 +370,221 @@
       "metadata": {},
       "source": [
         "4. \n",
-        "    a.\n",
-        "    b.\n",
+        "    a."
+      ],
+      "id": "567584ae"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "md-indent": "    "
+      },
+      "source": [
+        "#we will be plotting all unique hospitals"
+      ],
+      "id": "7b91f37e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "    b. \n",
         "\n",
         "## Identify hospital closures in POS file (15 pts) (*)\n",
         "\n",
-        "1. \n",
-        "2. \n",
+        "1. \n"
+      ],
+      "id": "7ffc22e5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# List to store suspected closures\n",
+        "suspected_closures = []\n",
+        "\n",
+        "# Filter for hospitals that were active in 2016\n",
+        "active_2016 = all_years_data[(all_years_data['YEAR'] == 2016) & (all_years_data['PGM_TRMNTN_CD'] == 0)]\n",
+        "\n",
+        "# Loop through each hospital active in 2016\n",
+        "for _, hospital in active_2016.iterrows():\n",
+        "    facility_name = hospital['FAC_NAME']\n",
+        "    zip_code = hospital['ZIP_CD']\n",
+        "    \n",
+        "    # Check if the hospital is closed in 2019 with specific closure codes (1, 2, 3, or 4)\n",
+        "    closed_2019 = all_years_data[\n",
+        "        (all_years_data['FAC_NAME'] == facility_name) &\n",
+        "        (all_years_data['ZIP_CD'] == zip_code) &\n",
+        "        (all_years_data['YEAR'] == 2019) &\n",
+        "        (all_years_data['PGM_TRMNTN_CD'].isin([1, 2, 3, 4]))\n",
+        "    ]\n",
+        "    \n",
+        "    # If the hospital is closed in 2019, add it to the suspected closures\n",
+        "    if not closed_2019.empty:\n",
+        "        suspected_closures.append({\n",
+        "            'FAC_NAME': facility_name,\n",
+        "            'ZIP_CD': zip_code,\n",
+        "            'year_of_closure': 2019\n",
+        "        })\n",
+        "\n",
+        "# Convert to DataFrame and remove duplicates to ensure unique hospitals\n",
+        "suspected_closures_df = pd.DataFrame(suspected_closures).drop_duplicates(subset=['FAC_NAME', 'ZIP_CD'])\n",
+        "\n",
+        "# Display the count of unique suspected closures\n",
+        "num_unique_suspected_closures = len(suspected_closures_df)\n",
+        "print(f\"Number of unique hospitals suspected to have closed by 2019: {num_unique_suspected_closures}\")\n",
+        "print(suspected_closures_df)"
+      ],
+      "id": "86995de4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "2. \n"
+      ],
+      "id": "9648d644"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(suspected_closures_df.head(10))"
+      ],
+      "id": "93698458",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
         "3. \n",
-        "    a.\n",
+        "    a.\n"
+      ],
+      "id": "15cd24d6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Pivot the data to have separate columns for termination codes for each year\n",
+        "termination_pivot = suspected_closures_df.pivot(index=['FAC_NAME', 'ZIP_CD'], columns='YEAR', values='PGM_TRMNTN_CD').reset_index()\n",
+        "\n",
+        "# Rename the columns to make it clearer\n",
+        "termination_pivot.columns = ['FAC_NAME', 'ZIP_CD', 'PGM_TRMNTN_CD_2017', 'PGM_TRMNTN_CD_2018', 'PGM_TRMNTN_CD_2019']\n",
+        "\n",
+        "# Filter for hospitals where termination codes for 2017 and 2019 are not the same as 2018\n",
+        "hospitals_different_termination = termination_pivot[\n",
+        "    (termination_pivot['PGM_TRMNTN_CD_2018'] != termination_pivot['PGM_TRMNTN_CD_2017']) &\n",
+        "    (termination_pivot['PGM_TRMNTN_CD_2018'] != termination_pivot['PGM_TRMNTN_CD_2019'])\n",
+        "]\n",
+        "\n",
+        "# Display the results\n",
+        "print(\"Hospitals where termination code for 2017 and 2019 is different from 2018:\")\n",
+        "print(hospitals_different_termination)"
+      ],
+      "id": "ae5bce90",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Display the results\n",
+        "print(\"Hospitals where termination code for 2017 and 2019 is different from 2018:\")\n",
+        "print(hospitals_different_termination)\n",
+        "    ```\n"
+      ],
+      "id": "31533461"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Ensure PGM_TRMNTN_CD is integer across all years for consistent comparison\n",
+        "all_years_data['PGM_TRMNTN_CD'] = pd.to_numeric(all_years_data['PGM_TRMNTN_CD'], errors='coerce').fillna(0).astype(int)\n",
+        "\n",
+        "# Initialize lists to store properly closed hospitals and suspected mergers\n",
+        "properly_closed_hospitals = []\n",
+        "merge_hospitals = []\n",
+        "\n",
+        "# Iterate over each hospital in suspected_closures_df\n",
+        "for _, hospital in suspected_closures_df.iterrows():\n",
+        "    facility_name = hospital['FAC_NAME']\n",
+        "    zip_code = hospital['ZIP_CD']\n",
+        "    \n",
+        "    # Filter for this hospital's data in all_years_data for the years 2017 and 2018\n",
+        "    hospital_data = all_years_data[\n",
+        "        (all_years_data['FAC_NAME'] == facility_name) & \n",
+        "        (all_years_data['ZIP_CD'] == zip_code) &\n",
+        "        (all_years_data['YEAR'].isin([2017, 2018]))\n",
+        "    ]\n",
+        "\n",
+        "    # Get the termination codes for 2018 and 2017, defaulting to 0 if the year is missing\n",
+        "    termination_2018 = hospital_data[hospital_data['YEAR'] == 2018]['PGM_TRMNTN_CD'].iloc[0] if not hospital_data[hospital_data['YEAR'] == 2018].empty else 0\n",
+        "    termination_2017 = hospital_data[hospital_data['YEAR'] == 2017]['PGM_TRMNTN_CD'].iloc[0] if not hospital_data[hospital_data['YEAR'] == 2017].empty else 0\n",
+        "\n",
+        "    # Classification logic as per the description\n",
+        "    if termination_2018 != 0:\n",
+        "        # Properly closed if terminated in 2018 (code other than 0)\n",
+        "        properly_closed_hospitals.append({\n",
+        "            'FAC_NAME': facility_name,\n",
+        "            'ZIP_CD': zip_code,\n",
+        "            'PGM_TRMNTN_CD_2017': termination_2017,\n",
+        "            'PGM_TRMNTN_CD_2018': termination_2018\n",
+        "        })\n",
+        "    elif termination_2018 == 0:\n",
+        "        # If active in 2018, check 2017 status\n",
+        "        if termination_2017 == 0:\n",
+        "            # Properly closed if also active in 2017\n",
+        "            properly_closed_hospitals.append({\n",
+        "                'FAC_NAME': facility_name,\n",
+        "                'ZIP_CD': zip_code,\n",
+        "                'PGM_TRMNTN_CD_2017': termination_2017,\n",
+        "                'PGM_TRMNTN_CD_2018': termination_2018\n",
+        "            })\n",
+        "        else:\n",
+        "            # Otherwise, add to suspected mergers\n",
+        "            merge_hospitals.append({\n",
+        "                'FAC_NAME': facility_name,\n",
+        "                'ZIP_CD': zip_code,\n",
+        "                'PGM_TRMNTN_CD_2017': termination_2017,\n",
+        "                'PGM_TRMNTN_CD_2018': termination_2018\n",
+        "            })\n",
+        "\n",
+        "# Convert results to DataFrames for inspection\n",
+        "properly_closed_hospitals_df = pd.DataFrame(properly_closed_hospitals)\n",
+        "merge_hospitals_df = pd.DataFrame(merge_hospitals)\n",
+        "\n",
+        "# Display results\n",
+        "print(\"Properly closed hospitals:\")\n",
+        "print(properly_closed_hospitals_df)\n",
+        "\n",
+        "print(\"\\nHospitals suspected of merger:\")\n",
+        "print(merge_hospitals_df)\n",
+        "\n",
+        "# Number of properly closed hospitals\n",
+        "num_properly_closed = properly_closed_hospitals_df.shape[0]\n",
+        "print(f\"Number of properly closed hospitals: {num_properly_closed}\")\n",
+        "\n",
+        "# Number of suspected mergers\n",
+        "num_suspected_mergers = merge_hospitals_df.shape[0]\n",
+        "print(f\"Number of suspected mergers: {num_suspected_mergers}\")"
+      ],
+      "id": "4f232db1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
         "    b.\n",
         "    c.\n",
         "\n",
@@ -475,7 +617,7 @@
         "\n",
         "## Reflecting on the exercise (10 pts) "
       ],
-      "id": "41a94fc4"
+      "id": "42fd3dea"
     }
   ],
   "metadata": {

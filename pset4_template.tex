@@ -1,0 +1,2541 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={problem set IV},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{problem set IV}
+\author{Jenny Zhong \& Summer Negahdar}
+\date{}
+
+\begin{document}
+\maketitle
+
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+  showspaces = false,
+  showtabs = false,
+  breaksymbolleft={},
+  breaklines
+}
+
+
+``This submission is our work alone and complies with the 30538
+integrity policy.'' Add your initials to indicate your agreement:
+\textbf{SN} \textbf{JZ}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  ``I have uploaded the names of anyone else other than my partner and I
+  worked with on the problem set
+  \textbf{\href{https://docs.google.com/forms/d/185usrCREQaUbvAXpWhChkjghdGgmAZXA3lPWpXLLsts/edit}{here}}''
+  (1 point)
+\item
+  Late coins used this pset: **\_\_** Late coins left after submission:
+  **\_\_**
+\item
+  Knit your \texttt{ps4.qmd} to an PDF file to make \texttt{ps4.pdf},
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The PDF should not be more than 25 pages. Use \texttt{head()} and
+    re-size figures when appropriate.
+  \end{itemize}
+\item
+  (Partner 1): push \texttt{ps4.qmd} and \texttt{ps4.pdf} to your github
+  repo.
+\item
+  (Partner 1): submit \texttt{ps4.pdf} via Gradescope. Add your partner
+  on Gradescope.
+\item
+  (Partner 1): tag your submission in Gradescope
+\end{enumerate}
+
+\subsection{Download and explore the Provider of Services (POS)
+file}\label{download-and-explore-the-provider-of-services-pos-file}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The variables that I pulled are: PRVDR\_CTGRY\_SBTYP\_CD: subtype
+  Identifies the subtype of the provider, within the primary category.
+  Used in reporting to show the breakdown of provider categories, mainly
+  for hospitals and SNFs.
+\end{enumerate}
+
+PRVDR\_CTGRY\_CD: provider category Identifies the type of provider
+participating in the Medicare/Medicaid program.
+
+PGM\_TRMNTN\_CD: termination code Indicates the provider's current
+termination status.
+
+TRMNTN\_EXPRTN\_DT: Termination or Expiration Date Date the provider was
+terminated. For CLIA providers, date the laboratory's certificate was
+terminated or the expiration date of the current CLIA certificate.
+
+FAC\_NAME: Facility / hospital name Name of the provider certified to
+participate in the Medicare and/or Medicaid programs.
+
+ZIP\_CD: Zip code Five-digit ZIP code for a provider's physical address.
+
+CHOW\_CNT: CHOW Count Number of times this provider has changed
+ownership.
+
+CHOW\_DT: CHOW Date Effective date of the most recent change of
+ownership for this provider.
+
+CITY\_NAME: City City in which the provider is physically located.
+
+PRVDR\_NUM: CMS number Provider number Six or ten position
+identification number that is assigned to a certified provider. This is
+the CMS Certification Number.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ geopandas }\ImportTok{as}\NormalTok{ gpd}
+\ImportTok{import}\NormalTok{ shapely}
+\ImportTok{import}\NormalTok{ os}
+\NormalTok{os.chdir(}\StringTok{"/Users/samarnegahdar/Desktop/untitled folder/problem{-}set{-}4{-}summer{-}jenny"}\NormalTok{)}
+\NormalTok{pos2016 }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"pos2016.csv"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(pos2016.head(}\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   PRVDR_CTGRY_SBTYP_CD  PRVDR_CTGRY_CD  CHOW_CNT     CHOW_DT     CITY_NAME  \
+0                   1.0               1         1         NaN        DOTHAN   
+1                   1.0               1         0         NaN    BRIDGEPORT   
+2                   1.0               1         0         NaN          BOAZ   
+3                   1.0               1         1  20100701.0      FLORENCE   
+4                   1.0               1         0         NaN           OPP   
+5                   1.0               1         1  20020701.0       LUVERNE   
+6                   1.0               1         3         NaN     HARTSELLE   
+7                   1.0               1         0         NaN  GUNTERSVILLE   
+8                   1.0               1         1         NaN    BIRMINGHAM   
+9                   1.0               1         1  20060401.0    FORT PAYNE   
+
+                           FAC_NAME PRVDR_NUM  PGM_TRMNTN_CD  \
+0  SOUTHEAST ALABAMA MEDICAL CENTER    010001              0   
+1            NORTH JACKSON HOSPITAL    010004              1   
+2     MARSHALL MEDICAL CENTER SOUTH    010005              0   
+3    ELIZA COFFEE MEMORIAL HOSPITAL    010006              0   
+4          MIZELL MEMORIAL HOSPITAL    010007              0   
+5       CRENSHAW COMMUNITY HOSPITAL    010008              0   
+6          HARTSELLE MEDICAL CENTER    010009              1   
+7     MARSHALL MEDICAL CENTER NORTH    010010              1   
+8                 ST VINCENT'S EAST    010011              0   
+9    DEKALB REGIONAL MEDICAL CENTER    010012              0   
+
+   TRMNTN_EXPRTN_DT   ZIP_CD  
+0               NaN  36301.0  
+1        20010831.0  35740.0  
+2               NaN  35957.0  
+3               NaN  35631.0  
+4               NaN  36467.0  
+5               NaN  36049.0  
+6        20120201.0  35640.0  
+7        20111001.0  35976.0  
+8               NaN  35235.0  
+9               NaN  35968.0  
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#converting to string}
+\NormalTok{pos2016[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pos2016[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{).}\BuiltInTok{str}\NormalTok{.zfill(}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{pos2016[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pos2016[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{).}\BuiltInTok{str}\NormalTok{.zfill(}\DecValTok{2}\NormalTok{)}
+\NormalTok{pos2016.head()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lllllllllll@{}}
+\toprule\noalign{}
+& PRVDR\_CTGRY\_SBTYP\_CD & PRVDR\_CTGRY\_CD & CHOW\_CNT & CHOW\_DT &
+CITY\_NAME & FAC\_NAME & PRVDR\_NUM & PGM\_TRMNTN\_CD &
+TRMNTN\_EXPRTN\_DT & ZIP\_CD \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 1.0 & 01 & 1 & NaN & DOTHAN & SOUTHEAST ALABAMA MEDICAL CENTER &
+010001 & 0 & NaN & 36301.0 \\
+1 & 1.0 & 01 & 0 & NaN & BRIDGEPORT & NORTH JACKSON HOSPITAL & 010004 &
+1 & 20010831.0 & 35740.0 \\
+2 & 1.0 & 01 & 0 & NaN & BOAZ & MARSHALL MEDICAL CENTER SOUTH & 010005 &
+0 & NaN & 35957.0 \\
+3 & 1.0 & 01 & 1 & 20100701.0 & FLORENCE & ELIZA COFFEE MEMORIAL
+HOSPITAL & 010006 & 0 & NaN & 35631.0 \\
+4 & 1.0 & 01 & 0 & NaN & OPP & MIZELL MEMORIAL HOSPITAL & 010007 & 0 &
+NaN & 36467.0 \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{st\_hospitals2016 }\OperatorTok{=}\NormalTok{ pos2016[(pos2016[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}1.0\textquotesingle{}}\NormalTok{) }\OperatorTok{\&}\NormalTok{ (pos2016[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}01\textquotesingle{}}\NormalTok{)]}
+
+\BuiltInTok{print}\NormalTok{(st\_hospitals2016.head())}
+\NormalTok{st\_hospitals2016.shape}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT     CHOW_DT   CITY_NAME  \
+0                  1.0             01         1         NaN      DOTHAN   
+1                  1.0             01         0         NaN  BRIDGEPORT   
+2                  1.0             01         0         NaN        BOAZ   
+3                  1.0             01         1  20100701.0    FLORENCE   
+4                  1.0             01         0         NaN         OPP   
+
+                           FAC_NAME PRVDR_NUM  PGM_TRMNTN_CD  \
+0  SOUTHEAST ALABAMA MEDICAL CENTER    010001              0   
+1            NORTH JACKSON HOSPITAL    010004              1   
+2     MARSHALL MEDICAL CENTER SOUTH    010005              0   
+3    ELIZA COFFEE MEMORIAL HOSPITAL    010006              0   
+4          MIZELL MEMORIAL HOSPITAL    010007              0   
+
+   TRMNTN_EXPRTN_DT   ZIP_CD  
+0               NaN  36301.0  
+1        20010831.0  35740.0  
+2               NaN  35957.0  
+3               NaN  35631.0  
+4               NaN  36467.0  
+\end{verbatim}
+
+\begin{verbatim}
+(7245, 10)
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  7,245 hospitals are reported in this data.
+\item
+  {[}To be filled in{]}
+\end{enumerate}
+
+adding the year 2016
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{st\_hospitals2016.loc[:, }\StringTok{\textquotesingle{}YEAR\textquotesingle{}}\NormalTok{] }\OperatorTok{=} \DecValTok{2016}
+\BuiltInTok{print}\NormalTok{(st\_hospitals2016)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT     CHOW_DT  \
+0                       1.0             01         1         NaN   
+1                       1.0             01         0         NaN   
+2                       1.0             01         0         NaN   
+3                       1.0             01         1  20100701.0   
+4                       1.0             01         0         NaN   
+...                     ...            ...       ...         ...   
+133526                  1.0             01         0         NaN   
+133527                  1.0             01         0         NaN   
+133528                  1.0             01         0         NaN   
+133529                  1.0             01         0         NaN   
+133530                  1.0             01         0         NaN   
+
+           CITY_NAME                          FAC_NAME PRVDR_NUM  \
+0             DOTHAN  SOUTHEAST ALABAMA MEDICAL CENTER    010001   
+1         BRIDGEPORT            NORTH JACKSON HOSPITAL    010004   
+2               BOAZ     MARSHALL MEDICAL CENTER SOUTH    010005   
+3           FLORENCE    ELIZA COFFEE MEMORIAL HOSPITAL    010006   
+4                OPP          MIZELL MEMORIAL HOSPITAL    010007   
+...              ...                               ...       ...   
+133526        WEIMAR             WEIMAR MEDICAL CENTER    670114   
+133527     CLEVELAND      CLEVELAND EMERGENCY HOSPTIAL    670115   
+133528    FORT WORTH                WISE HEALTH SYSTEM    670116   
+133529  GRAND SALINE  TEXAS GENERAL HOSPITAL- VZRMC LP    670117   
+133530       HOUSTON              FIRST TEXAS HOSPITAL    670118   
+
+        PGM_TRMNTN_CD  TRMNTN_EXPRTN_DT   ZIP_CD  YEAR  
+0                   0               NaN  36301.0  2016  
+1                   1        20010831.0  35740.0  2016  
+2                   0               NaN  35957.0  2016  
+3                   0               NaN  35631.0  2016  
+4                   0               NaN  36467.0  2016  
+...               ...               ...      ...   ...  
+133526              0               NaN  78962.0  2016  
+133527              0               NaN  77327.0  2016  
+133528              0               NaN  76177.0  2016  
+133529              0               NaN  75140.0  2016  
+133530              0               NaN  77070.0  2016  
+
+[7245 rows x 11 columns]
+\end{verbatim}
+
+\begin{verbatim}
+/var/folders/j5/rv933w1173s068kbzq0kp2xh0000gn/T/ipykernel_20187/459544367.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  st_hospitals2016.loc[:, 'YEAR'] = 2016
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  for 2017:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#importing pos2017}
+\NormalTok{pos2017 }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"pos2017.csv"}\NormalTok{, encoding}\OperatorTok{=}\StringTok{\textquotesingle{}latin1\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#converting to string}
+\NormalTok{pos2017[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pos2017[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{).}\BuiltInTok{str}\NormalTok{.zfill(}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{pos2017[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pos2017[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{).}\BuiltInTok{str}\NormalTok{.zfill(}\DecValTok{2}\NormalTok{) }\CommentTok{\#\#filling numbers with a zero before integer}
+\NormalTok{pos2017.head()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lllllllllll@{}}
+\toprule\noalign{}
+& PRVDR\_CTGRY\_SBTYP\_CD & PRVDR\_CTGRY\_CD & CHOW\_CNT & CHOW\_DT &
+CITY\_NAME & FAC\_NAME & PRVDR\_NUM & PGM\_TRMNTN\_CD &
+TRMNTN\_EXPRTN\_DT & ZIP\_CD \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 1.0 & 01 & 1 & NaN & DOTHAN & SOUTHEAST ALABAMA MEDICAL CENTER &
+010001 & 0 & NaN & 36301.0 \\
+1 & 1.0 & 01 & 0 & NaN & BRIDGEPORT & NORTH JACKSON HOSPITAL & 010004 &
+1 & 20010831.0 & 35740.0 \\
+2 & 1.0 & 01 & 0 & NaN & BOAZ & MARSHALL MEDICAL CENTER SOUTH & 010005 &
+0 & NaN & 35957.0 \\
+3 & 1.0 & 01 & 1 & 20100701.0 & FLORENCE & ELIZA COFFEE MEMORIAL
+HOSPITAL & 010006 & 0 & NaN & 35631.0 \\
+4 & 1.0 & 01 & 0 & NaN & OPP & MIZELL MEMORIAL HOSPITAL & 010007 & 0 &
+NaN & 36467.0 \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#then focusing on short term hospitals }
+\NormalTok{st\_hospitals2017 }\OperatorTok{=}\NormalTok{ pos2017[(pos2017[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}1.0\textquotesingle{}}\NormalTok{) }\OperatorTok{\&}\NormalTok{ (pos2017[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}01\textquotesingle{}}\NormalTok{)]}
+
+\BuiltInTok{print}\NormalTok{(st\_hospitals2017.head())}
+\BuiltInTok{print}\NormalTok{(st\_hospitals2017.tail())}
+\NormalTok{st\_hospitals2017.shape}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT     CHOW_DT   CITY_NAME  \
+0                  1.0             01         1         NaN      DOTHAN   
+1                  1.0             01         0         NaN  BRIDGEPORT   
+2                  1.0             01         0         NaN        BOAZ   
+3                  1.0             01         1  20100701.0    FLORENCE   
+4                  1.0             01         0         NaN         OPP   
+
+                           FAC_NAME PRVDR_NUM  PGM_TRMNTN_CD  \
+0  SOUTHEAST ALABAMA MEDICAL CENTER    010001              0   
+1            NORTH JACKSON HOSPITAL    010004              1   
+2     MARSHALL MEDICAL CENTER SOUTH    010005              0   
+3    ELIZA COFFEE MEMORIAL HOSPITAL    010006              0   
+4          MIZELL MEMORIAL HOSPITAL    010007              0   
+
+   TRMNTN_EXPRTN_DT   ZIP_CD  
+0               NaN  36301.0  
+1        20010831.0  35740.0  
+2               NaN  35957.0  
+3               NaN  35631.0  
+4               NaN  36467.0  
+       PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT  CHOW_DT      CITY_NAME  \
+135471                  1.0             01         0      NaN        HOUSTON   
+135472                  1.0             01         0      NaN        HOUSTON   
+135473                  1.0             01         0      NaN        EL PASO   
+135474                  1.0             01         0      NaN          HURST   
+135475                  1.0             01         0      NaN  THE WOODLANDS   
+
+                                                FAC_NAME PRVDR_NUM  \
+135471                              FIRST TEXAS HOSPITAL    670118   
+135472          PROVIDENCE HOSPITAL OF NORTH HOUSTON LLC    670119   
+135473  THE HOSPITALS OF PROVIDENCE TRANSMOUNTAIN CAMPUS    670120   
+135474                     SAINT CAMILLUS MEDICAL CENTER    670121   
+135475          HOUSTON METHODIST THE WOODLANDS HOSPITAL    670122   
+
+        PGM_TRMNTN_CD  TRMNTN_EXPRTN_DT   ZIP_CD  
+135471              0               NaN  77070.0  
+135472              0               NaN  77090.0  
+135473              0               NaN  79911.0  
+135474              0               NaN  76054.0  
+135475              0               NaN  77385.0  
+\end{verbatim}
+
+\begin{verbatim}
+(7260, 10)
+\end{verbatim}
+
+Adding the 2017 column
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{st\_hospitals2017.loc[:, }\StringTok{\textquotesingle{}YEAR\textquotesingle{}}\NormalTok{] }\OperatorTok{=} \DecValTok{2017}
+
+\BuiltInTok{print}\NormalTok{(st\_hospitals2017)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT     CHOW_DT  \
+0                       1.0             01         1         NaN   
+1                       1.0             01         0         NaN   
+2                       1.0             01         0         NaN   
+3                       1.0             01         1  20100701.0   
+4                       1.0             01         0         NaN   
+...                     ...            ...       ...         ...   
+135471                  1.0             01         0         NaN   
+135472                  1.0             01         0         NaN   
+135473                  1.0             01         0         NaN   
+135474                  1.0             01         0         NaN   
+135475                  1.0             01         0         NaN   
+
+            CITY_NAME                                          FAC_NAME  \
+0              DOTHAN                  SOUTHEAST ALABAMA MEDICAL CENTER   
+1          BRIDGEPORT                            NORTH JACKSON HOSPITAL   
+2                BOAZ                     MARSHALL MEDICAL CENTER SOUTH   
+3            FLORENCE                    ELIZA COFFEE MEMORIAL HOSPITAL   
+4                 OPP                          MIZELL MEMORIAL HOSPITAL   
+...               ...                                               ...   
+135471        HOUSTON                              FIRST TEXAS HOSPITAL   
+135472        HOUSTON          PROVIDENCE HOSPITAL OF NORTH HOUSTON LLC   
+135473        EL PASO  THE HOSPITALS OF PROVIDENCE TRANSMOUNTAIN CAMPUS   
+135474          HURST                     SAINT CAMILLUS MEDICAL CENTER   
+135475  THE WOODLANDS          HOUSTON METHODIST THE WOODLANDS HOSPITAL   
+
+       PRVDR_NUM  PGM_TRMNTN_CD  TRMNTN_EXPRTN_DT   ZIP_CD  YEAR  
+0         010001              0               NaN  36301.0  2017  
+1         010004              1        20010831.0  35740.0  2017  
+2         010005              0               NaN  35957.0  2017  
+3         010006              0               NaN  35631.0  2017  
+4         010007              0               NaN  36467.0  2017  
+...          ...            ...               ...      ...   ...  
+135471    670118              0               NaN  77070.0  2017  
+135472    670119              0               NaN  77090.0  2017  
+135473    670120              0               NaN  79911.0  2017  
+135474    670121              0               NaN  76054.0  2017  
+135475    670122              0               NaN  77385.0  2017  
+
+[7260 rows x 11 columns]
+\end{verbatim}
+
+\begin{verbatim}
+/var/folders/j5/rv933w1173s068kbzq0kp2xh0000gn/T/ipykernel_20187/3920803632.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  st_hospitals2017.loc[:, 'YEAR'] = 2017
+\end{verbatim}
+
+for 2018:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#importing pos2018}
+\NormalTok{pos2018 }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{\textquotesingle{}pos2018.csv\textquotesingle{}}\NormalTok{, encoding}\OperatorTok{=}\StringTok{\textquotesingle{}latin1\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#converting to string}
+\NormalTok{pos2018[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pos2018[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{).}\BuiltInTok{str}\NormalTok{.zfill(}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{pos2018[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pos2018[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{).}\BuiltInTok{str}\NormalTok{.zfill(}\DecValTok{2}\NormalTok{)}
+\NormalTok{pos2018.head()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lllllllllll@{}}
+\toprule\noalign{}
+& PRVDR\_CTGRY\_SBTYP\_CD & PRVDR\_CTGRY\_CD & CHOW\_CNT & CHOW\_DT &
+CITY\_NAME & FAC\_NAME & PRVDR\_NUM & PGM\_TRMNTN\_CD &
+TRMNTN\_EXPRTN\_DT & ZIP\_CD \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 1.0 & 01 & 1 & NaN & DOTHAN & SOUTHEAST ALABAMA MEDICAL CENTER &
+010001 & 0 & NaN & 36301.0 \\
+1 & 1.0 & 01 & 0 & NaN & BRIDGEPORT & NORTH JACKSON HOSPITAL & 010004 &
+1 & 20010831.0 & 35740.0 \\
+2 & 1.0 & 01 & 0 & NaN & BOAZ & MARSHALL MEDICAL CENTER SOUTH & 010005 &
+0 & NaN & 35957.0 \\
+3 & 1.0 & 01 & 1 & 20100701.0 & FLORENCE & ELIZA COFFEE MEMORIAL
+HOSPITAL & 010006 & 0 & NaN & 35631.0 \\
+4 & 1.0 & 01 & 0 & NaN & OPP & MIZELL MEMORIAL HOSPITAL & 010007 & 0 &
+NaN & 36467.0 \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#then focus on st hospitals }
+\NormalTok{st\_hospitals2018 }\OperatorTok{=}\NormalTok{ pos2018[(pos2018[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}1.0\textquotesingle{}}\NormalTok{) }\OperatorTok{\&}\NormalTok{ (pos2018[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}01\textquotesingle{}}\NormalTok{)]}
+
+\BuiltInTok{print}\NormalTok{(st\_hospitals2018.head())}
+\BuiltInTok{print}\NormalTok{(st\_hospitals2018.tail())}
+\NormalTok{st\_hospitals2018.shape}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT     CHOW_DT   CITY_NAME  \
+0                  1.0             01         1         NaN      DOTHAN   
+1                  1.0             01         0         NaN  BRIDGEPORT   
+2                  1.0             01         0         NaN        BOAZ   
+3                  1.0             01         1  20100701.0    FLORENCE   
+4                  1.0             01         0         NaN         OPP   
+
+                           FAC_NAME PRVDR_NUM  PGM_TRMNTN_CD  \
+0  SOUTHEAST ALABAMA MEDICAL CENTER    010001              0   
+1            NORTH JACKSON HOSPITAL    010004              1   
+2     MARSHALL MEDICAL CENTER SOUTH    010005              0   
+3    ELIZA COFFEE MEMORIAL HOSPITAL    010006              0   
+4          MIZELL MEMORIAL HOSPITAL    010007              0   
+
+   TRMNTN_EXPRTN_DT   ZIP_CD  
+0               NaN  36301.0  
+1        20010831.0  35740.0  
+2               NaN  35957.0  
+3               NaN  35631.0  
+4               NaN  36467.0  
+       PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT  CHOW_DT      CITY_NAME  \
+137567                  1.0             01         0      NaN          HURST   
+137568                  1.0             01         0      NaN  THE WOODLANDS   
+137569                  1.0             01         0      NaN   HORIZON CITY   
+137570                  1.0             01         0      NaN    SAN ANTONIO   
+137571                  1.0             01         0      NaN       CROCKETT   
+
+                                               FAC_NAME PRVDR_NUM  \
+137567                    SAINT CAMILLUS MEDICAL CENTER    670121   
+137568         HOUSTON METHODIST THE WOODLANDS HOSPITAL    670122   
+137569  THE HOSPITALS OF PROVIDENCE HORIZON CITY CAMPUS    670124   
+137570              TEXAS CENTER FOR INFECTIOUS DISEASE    670125   
+137571                          CROCKETT MEDICAL CENTER    670126   
+
+        PGM_TRMNTN_CD  TRMNTN_EXPRTN_DT   ZIP_CD  
+137567              0               NaN  76054.0  
+137568              0               NaN  77385.0  
+137569              0               NaN  79928.0  
+137570              0               NaN  78223.0  
+137571              0               NaN  75835.0  
+\end{verbatim}
+
+\begin{verbatim}
+(7277, 10)
+\end{verbatim}
+
+Adding the 2018 column
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#column had to be extended}
+\NormalTok{st\_hospitals2018.loc[:, }\StringTok{\textquotesingle{}YEAR\textquotesingle{}}\NormalTok{] }\OperatorTok{=} \DecValTok{2018}
+
+\BuiltInTok{print}\NormalTok{(st\_hospitals2018)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT     CHOW_DT  \
+0                       1.0             01         1         NaN   
+1                       1.0             01         0         NaN   
+2                       1.0             01         0         NaN   
+3                       1.0             01         1  20100701.0   
+4                       1.0             01         0         NaN   
+...                     ...            ...       ...         ...   
+137567                  1.0             01         0         NaN   
+137568                  1.0             01         0         NaN   
+137569                  1.0             01         0         NaN   
+137570                  1.0             01         0         NaN   
+137571                  1.0             01         0         NaN   
+
+            CITY_NAME                                         FAC_NAME  \
+0              DOTHAN                 SOUTHEAST ALABAMA MEDICAL CENTER   
+1          BRIDGEPORT                           NORTH JACKSON HOSPITAL   
+2                BOAZ                    MARSHALL MEDICAL CENTER SOUTH   
+3            FLORENCE                   ELIZA COFFEE MEMORIAL HOSPITAL   
+4                 OPP                         MIZELL MEMORIAL HOSPITAL   
+...               ...                                              ...   
+137567          HURST                    SAINT CAMILLUS MEDICAL CENTER   
+137568  THE WOODLANDS         HOUSTON METHODIST THE WOODLANDS HOSPITAL   
+137569   HORIZON CITY  THE HOSPITALS OF PROVIDENCE HORIZON CITY CAMPUS   
+137570    SAN ANTONIO              TEXAS CENTER FOR INFECTIOUS DISEASE   
+137571       CROCKETT                          CROCKETT MEDICAL CENTER   
+
+       PRVDR_NUM  PGM_TRMNTN_CD  TRMNTN_EXPRTN_DT   ZIP_CD  YEAR  
+0         010001              0               NaN  36301.0  2018  
+1         010004              1        20010831.0  35740.0  2018  
+2         010005              0               NaN  35957.0  2018  
+3         010006              0               NaN  35631.0  2018  
+4         010007              0               NaN  36467.0  2018  
+...          ...            ...               ...      ...   ...  
+137567    670121              0               NaN  76054.0  2018  
+137568    670122              0               NaN  77385.0  2018  
+137569    670124              0               NaN  79928.0  2018  
+137570    670125              0               NaN  78223.0  2018  
+137571    670126              0               NaN  75835.0  2018  
+
+[7277 rows x 11 columns]
+\end{verbatim}
+
+\begin{verbatim}
+/var/folders/j5/rv933w1173s068kbzq0kp2xh0000gn/T/ipykernel_20187/800898756.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  st_hospitals2018.loc[:, 'YEAR'] = 2018
+\end{verbatim}
+
+for 2019:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#importing pos2019}
+\NormalTok{pos2019 }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{\textquotesingle{}pos2019.csv\textquotesingle{}}\NormalTok{, encoding}\OperatorTok{=}\StringTok{\textquotesingle{}latin1\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#converting to string}
+\NormalTok{pos2019[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pos2019[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{).}\BuiltInTok{str}\NormalTok{.zfill(}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{pos2019[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pos2019[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{).}\BuiltInTok{str}\NormalTok{.zfill(}\DecValTok{2}\NormalTok{)}
+\NormalTok{pos2019.head()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lllllllllll@{}}
+\toprule\noalign{}
+& PRVDR\_CTGRY\_SBTYP\_CD & PRVDR\_CTGRY\_CD & CHOW\_CNT & CHOW\_DT &
+CITY\_NAME & FAC\_NAME & PRVDR\_NUM & PGM\_TRMNTN\_CD &
+TRMNTN\_EXPRTN\_DT & ZIP\_CD \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 1.0 & 01 & 1 & NaN & DOTHAN & SOUTHEAST ALABAMA MEDICAL CENTER &
+010001 & 0 & NaN & 36301.0 \\
+1 & 1.0 & 01 & 0 & NaN & BRIDGEPORT & NORTH JACKSON HOSPITAL & 010004 &
+1 & 20010831.0 & 35740.0 \\
+2 & 1.0 & 01 & 0 & NaN & BOAZ & MARSHALL MEDICAL CENTERS SOUTH CAMPUS &
+010005 & 0 & NaN & 35957.0 \\
+3 & 1.0 & 01 & 1 & 20100701.0 & FLORENCE & NORTH ALABAMA MEDICAL CENTER
+& 010006 & 0 & NaN & 35630.0 \\
+4 & 1.0 & 01 & 0 & NaN & OPP & MIZELL MEMORIAL HOSPITAL & 010007 & 0 &
+NaN & 36467.0 \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#then focus on st hospitals }
+\NormalTok{st\_hospitals2019 }\OperatorTok{=}\NormalTok{ pos2019[(pos2019[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_SBTYP\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}1.0\textquotesingle{}}\NormalTok{) }\OperatorTok{\&}\NormalTok{ (pos2019[}\StringTok{\textquotesingle{}PRVDR\_CTGRY\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}01\textquotesingle{}}\NormalTok{)]}
+
+\BuiltInTok{print}\NormalTok{(st\_hospitals2019.head())}
+\BuiltInTok{print}\NormalTok{(st\_hospitals2019.tail())}
+\NormalTok{st\_hospitals2019.shape}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT     CHOW_DT   CITY_NAME  \
+0                  1.0             01         1         NaN      DOTHAN   
+1                  1.0             01         0         NaN  BRIDGEPORT   
+2                  1.0             01         0         NaN        BOAZ   
+3                  1.0             01         1  20100701.0    FLORENCE   
+4                  1.0             01         0         NaN         OPP   
+
+                                FAC_NAME PRVDR_NUM  PGM_TRMNTN_CD  \
+0       SOUTHEAST ALABAMA MEDICAL CENTER    010001              0   
+1                 NORTH JACKSON HOSPITAL    010004              1   
+2  MARSHALL MEDICAL CENTERS SOUTH CAMPUS    010005              0   
+3           NORTH ALABAMA MEDICAL CENTER    010006              0   
+4               MIZELL MEMORIAL HOSPITAL    010007              0   
+
+   TRMNTN_EXPRTN_DT   ZIP_CD  
+0               NaN  36301.0  
+1        20010831.0  35740.0  
+2               NaN  35957.0  
+3               NaN  35630.0  
+4               NaN  36467.0  
+       PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT  CHOW_DT     CITY_NAME  \
+139514                  1.0             01         0      NaN      CROCKETT   
+139515                  1.0             01         0      NaN       EL PASO   
+139516                  1.0             01         0      NaN  PFLUGERVILLE   
+139517                  1.0             01         0      NaN       HOUSTON   
+139518                  1.0             01         0      NaN   SAN ANTONIO   
+
+                                                 FAC_NAME PRVDR_NUM  \
+139514                            CROCKETT MEDICAL CENTER    670126   
+139515                              EL PASO LTAC HOSPTIAL    670127   
+139516  BAYLOR SCOTT & WHITE MEDICAL CENTER  PFLUGERV...    670128   
+139517                               THE HEIGHTS HOSPITAL    670129   
+139518                                SOUTHCROSS HOSPITAL    670130   
+
+        PGM_TRMNTN_CD  TRMNTN_EXPRTN_DT   ZIP_CD  
+139514              7        20190131.0  75835.0  
+139515              7        20190630.0  79902.0  
+139516              0               NaN  78660.0  
+139517              0               NaN  77008.0  
+139518              0               NaN  78222.0  
+\end{verbatim}
+
+\begin{verbatim}
+(7303, 10)
+\end{verbatim}
+
+Adding the 2019 column
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{st\_hospitals2019.loc[:, }\StringTok{\textquotesingle{}YEAR\textquotesingle{}}\NormalTok{] }\OperatorTok{=} \DecValTok{2019}
+
+\BuiltInTok{print}\NormalTok{(st\_hospitals2019.head(}\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT     CHOW_DT   CITY_NAME  \
+0                  1.0             01         1         NaN      DOTHAN   
+1                  1.0             01         0         NaN  BRIDGEPORT   
+2                  1.0             01         0         NaN        BOAZ   
+3                  1.0             01         1  20100701.0    FLORENCE   
+4                  1.0             01         0         NaN         OPP   
+
+                                FAC_NAME PRVDR_NUM  PGM_TRMNTN_CD  \
+0       SOUTHEAST ALABAMA MEDICAL CENTER    010001              0   
+1                 NORTH JACKSON HOSPITAL    010004              1   
+2  MARSHALL MEDICAL CENTERS SOUTH CAMPUS    010005              0   
+3           NORTH ALABAMA MEDICAL CENTER    010006              0   
+4               MIZELL MEMORIAL HOSPITAL    010007              0   
+
+   TRMNTN_EXPRTN_DT   ZIP_CD  YEAR  
+0               NaN  36301.0  2019  
+1        20010831.0  35740.0  2019  
+2               NaN  35957.0  2019  
+3               NaN  35630.0  2019  
+4               NaN  36467.0  2019  
+\end{verbatim}
+
+\begin{verbatim}
+/var/folders/j5/rv933w1173s068kbzq0kp2xh0000gn/T/ipykernel_20187/1564410207.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  st_hospitals2019.loc[:, 'YEAR'] = 2019
+\end{verbatim}
+
+\textbf{Appending them together}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{all\_years\_data }\OperatorTok{=}\NormalTok{ pd.concat([st\_hospitals2016, st\_hospitals2017, st\_hospitals2018, st\_hospitals2019], ignore\_index}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(all\_years\_data.head())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD  CHOW_CNT     CHOW_DT   CITY_NAME  \
+0                  1.0             01         1         NaN      DOTHAN   
+1                  1.0             01         0         NaN  BRIDGEPORT   
+2                  1.0             01         0         NaN        BOAZ   
+3                  1.0             01         1  20100701.0    FLORENCE   
+4                  1.0             01         0         NaN         OPP   
+
+                           FAC_NAME PRVDR_NUM  PGM_TRMNTN_CD  \
+0  SOUTHEAST ALABAMA MEDICAL CENTER    010001              0   
+1            NORTH JACKSON HOSPITAL    010004              1   
+2     MARSHALL MEDICAL CENTER SOUTH    010005              0   
+3    ELIZA COFFEE MEMORIAL HOSPITAL    010006              0   
+4          MIZELL MEMORIAL HOSPITAL    010007              0   
+
+   TRMNTN_EXPRTN_DT   ZIP_CD  YEAR  
+0               NaN  36301.0  2016  
+1        20010831.0  35740.0  2016  
+2               NaN  35957.0  2016  
+3               NaN  35631.0  2016  
+4               NaN  36467.0  2016  
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+  \end{enumerate}
+
+  ::: \{.cell execution\_count=18\}
+  \texttt{\{.python\ .cell-code\}\ \ \#we\ will\ be\ plotting\ all\ unique\ hospitals}
+  :::
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \setcounter{enumii}{1}
+  \tightlist
+  \item
+  \end{enumerate}
+\end{enumerate}
+
+\subsection{Identify hospital closures in POS file (15 pts)
+(*)}\label{identify-hospital-closures-in-pos-file-15-pts}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# List to store suspected closures}
+\NormalTok{suspected\_closures }\OperatorTok{=}\NormalTok{ []}
+
+\CommentTok{\# Filter for hospitals that were active in 2016}
+\NormalTok{active\_2016 }\OperatorTok{=}\NormalTok{ all\_years\_data[(all\_years\_data[}\StringTok{\textquotesingle{}YEAR\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \DecValTok{2016}\NormalTok{) }\OperatorTok{\&}\NormalTok{ (all\_years\_data[}\StringTok{\textquotesingle{}PGM\_TRMNTN\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \DecValTok{0}\NormalTok{)]}
+
+\CommentTok{\# Loop through each hospital active in 2016}
+\ControlFlowTok{for}\NormalTok{ \_, hospital }\KeywordTok{in}\NormalTok{ active\_2016.iterrows():}
+\NormalTok{    facility\_name }\OperatorTok{=}\NormalTok{ hospital[}\StringTok{\textquotesingle{}FAC\_NAME\textquotesingle{}}\NormalTok{]}
+\NormalTok{    zip\_code }\OperatorTok{=}\NormalTok{ hospital[}\StringTok{\textquotesingle{}ZIP\_CD\textquotesingle{}}\NormalTok{]}
+    
+    \CommentTok{\# Check if the hospital is closed in 2019 with specific closure codes (1, 2, 3, or 4)}
+\NormalTok{    closed\_2019 }\OperatorTok{=}\NormalTok{ all\_years\_data[}
+\NormalTok{        (all\_years\_data[}\StringTok{\textquotesingle{}FAC\_NAME\textquotesingle{}}\NormalTok{] }\OperatorTok{==}\NormalTok{ facility\_name) }\OperatorTok{\&}
+\NormalTok{        (all\_years\_data[}\StringTok{\textquotesingle{}ZIP\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==}\NormalTok{ zip\_code) }\OperatorTok{\&}
+\NormalTok{        (all\_years\_data[}\StringTok{\textquotesingle{}YEAR\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \DecValTok{2019}\NormalTok{) }\OperatorTok{\&}
+\NormalTok{        (all\_years\_data[}\StringTok{\textquotesingle{}PGM\_TRMNTN\_CD\textquotesingle{}}\NormalTok{].isin([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]))}
+\NormalTok{    ]}
+    
+    \CommentTok{\# If the hospital is closed in 2019, add it to the suspected closures}
+    \ControlFlowTok{if} \KeywordTok{not}\NormalTok{ closed\_2019.empty:}
+\NormalTok{        suspected\_closures.append(\{}
+            \StringTok{\textquotesingle{}FAC\_NAME\textquotesingle{}}\NormalTok{: facility\_name,}
+            \StringTok{\textquotesingle{}ZIP\_CD\textquotesingle{}}\NormalTok{: zip\_code,}
+            \StringTok{\textquotesingle{}year\_of\_closure\textquotesingle{}}\NormalTok{: }\DecValTok{2019}
+\NormalTok{        \})}
+
+\CommentTok{\# Convert to DataFrame and remove duplicates to ensure unique hospitals}
+\NormalTok{suspected\_closures\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(suspected\_closures).drop\_duplicates(subset}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}FAC\_NAME\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ZIP\_CD\textquotesingle{}}\NormalTok{])}
+
+\CommentTok{\# Display the count of unique suspected closures}
+\NormalTok{num\_unique\_suspected\_closures }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(suspected\_closures\_df)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Number of unique hospitals suspected to have closed by 2019: }\SpecialCharTok{\{}\NormalTok{num\_unique\_suspected\_closures}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(suspected\_closures\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Number of unique hospitals suspected to have closed by 2019: 145
+                                     FAC_NAME   ZIP_CD  year_of_closure
+0                    GEORGIANA MEDICAL CENTER  36033.0             2019
+1                            RMC JACKSONVILLE  36265.0             2019
+2                               UAB HIGHLANDS  35205.0             2019
+3                   ATMORE COMMUNITY HOSPITAL  36502.0             2019
+4           NORTH ALABAMA SPECIALITY HOSPITAL  35611.0             2019
+..                                        ...      ...              ...
+140                WALNUT HILL MEDICAL CENTER  75231.0             2019
+141  LITTLE RIVER HEALTHCARE CAMERON HOSPITAL  76520.0             2019
+142     BAY AREA REGIONAL MEDICAL CENTER, LLC  77598.0             2019
+143           BAYLOR EMERGENCY MEDICAL CENTER  75087.0             2019
+144          TEXAS GENERAL HOSPITAL- VZRMC LP  75140.0             2019
+
+[145 rows x 3 columns]
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{print}\NormalTok{(suspected\_closures\_df.head(}\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                            FAC_NAME   ZIP_CD  year_of_closure
+0           GEORGIANA MEDICAL CENTER  36033.0             2019
+1                   RMC JACKSONVILLE  36265.0             2019
+2                      UAB HIGHLANDS  35205.0             2019
+3          ATMORE COMMUNITY HOSPITAL  36502.0             2019
+4  NORTH ALABAMA SPECIALITY HOSPITAL  35611.0             2019
+5             ABRAZO MARYVALE CAMPUS  85031.0             2019
+6                   GILBERT HOSPITAL  85295.0             2019
+7   FLORENCE HOSPITAL AT ANTHEM, LLC  85132.0             2019
+8    PACIFIC ALLIANCE MEDICAL CENTER  90012.0             2019
+9                  O'CONNOR HOSPITAL  95128.0             2019
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+  \end{enumerate}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Lists to store final classifications}
+\NormalTok{properly\_closed\_hospitals }\OperatorTok{=}\NormalTok{ []}
+\NormalTok{merge\_hospitals }\OperatorTok{=}\NormalTok{ []}
+
+\CommentTok{\# Iterate over each hospital in open\_2016\_closed\_2019\_df}
+\ControlFlowTok{for}\NormalTok{ \_, hospital }\KeywordTok{in}\NormalTok{ suspected\_closures\_df.iterrows():}
+\NormalTok{    facility\_name }\OperatorTok{=}\NormalTok{ hospital[}\StringTok{\textquotesingle{}FAC\_NAME\textquotesingle{}}\NormalTok{]}
+\NormalTok{    zip\_code }\OperatorTok{=}\NormalTok{ hospital[}\StringTok{\textquotesingle{}ZIP\_CD\textquotesingle{}}\NormalTok{]}
+    
+    \CommentTok{\# Filter for this hospital\textquotesingle{}s data in all\_years\_data for the years 2017 and 2018}
+\NormalTok{    hospital\_data }\OperatorTok{=}\NormalTok{ all\_years\_data[}
+\NormalTok{        (all\_years\_data[}\StringTok{\textquotesingle{}FAC\_NAME\textquotesingle{}}\NormalTok{] }\OperatorTok{==}\NormalTok{ facility\_name) }\OperatorTok{\&} 
+\NormalTok{        (all\_years\_data[}\StringTok{\textquotesingle{}ZIP\_CD\textquotesingle{}}\NormalTok{] }\OperatorTok{==}\NormalTok{ zip\_code) }\OperatorTok{\&}
+\NormalTok{        (all\_years\_data[}\StringTok{\textquotesingle{}YEAR\textquotesingle{}}\NormalTok{].isin([}\DecValTok{2017}\NormalTok{, }\DecValTok{2018}\NormalTok{]))}
+\NormalTok{    ]}
+
+    \CommentTok{\# Debug print statements to understand the data for this hospital}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Processing hospital: }\SpecialCharTok{\{}\NormalTok{facility\_name}\SpecialCharTok{\}}\SpecialStringTok{ in ZIP: }\SpecialCharTok{\{}\NormalTok{zip\_code}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Hospital data across years:}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, hospital\_data[[}\StringTok{\textquotesingle{}YEAR\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}PGM\_TRMNTN\_CD\textquotesingle{}}\NormalTok{]])}
+
+    \CommentTok{\# Determine if it\textquotesingle{}s a proper closure or suspected merger}
+    \ControlFlowTok{if} \KeywordTok{not}\NormalTok{ hospital\_data.empty:}
+        \CommentTok{\# Check for 2018 status first}
+\NormalTok{        year\_2018\_data }\OperatorTok{=}\NormalTok{ hospital\_data[hospital\_data[}\StringTok{\textquotesingle{}YEAR\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \DecValTok{2018}\NormalTok{]}
+        
+        \ControlFlowTok{if} \KeywordTok{not}\NormalTok{ year\_2018\_data.empty:}
+\NormalTok{            termination\_code\_2018 }\OperatorTok{=}\NormalTok{ year\_2018\_data[}\StringTok{\textquotesingle{}PGM\_TRMNTN\_CD\textquotesingle{}}\NormalTok{].iloc[}\DecValTok{0}\NormalTok{]}
+            \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"2018 Termination Code: }\SpecialCharTok{\{}\NormalTok{termination\_code\_2018}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+            
+            \ControlFlowTok{if}\NormalTok{ termination\_code\_2018 }\OperatorTok{!=} \DecValTok{0}\NormalTok{:}
+                \CommentTok{\# Properly closed if not active in 2018}
+\NormalTok{                properly\_closed\_hospitals.append(\{}
+                    \StringTok{\textquotesingle{}FAC\_NAME\textquotesingle{}}\NormalTok{: facility\_name,}
+                    \StringTok{\textquotesingle{}ZIP\_CD\textquotesingle{}}\NormalTok{: zip\_code}
+\NormalTok{                \})}
+                \BuiltInTok{print}\NormalTok{(}\StringTok{"Classified as properly closed.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+            \ControlFlowTok{else}\NormalTok{:}
+                \CommentTok{\# If active in 2018, check 2017}
+\NormalTok{                year\_2017\_data }\OperatorTok{=}\NormalTok{ hospital\_data[hospital\_data[}\StringTok{\textquotesingle{}YEAR\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \DecValTok{2017}\NormalTok{]}
+                
+                \ControlFlowTok{if} \KeywordTok{not}\NormalTok{ year\_2017\_data.empty:}
+\NormalTok{                    termination\_code\_2017 }\OperatorTok{=}\NormalTok{ year\_2017\_data[}\StringTok{\textquotesingle{}PGM\_TRMNTN\_CD\textquotesingle{}}\NormalTok{].iloc[}\DecValTok{0}\NormalTok{]}
+                    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"2017 Termination Code: }\SpecialCharTok{\{}\NormalTok{termination\_code\_2017}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+                    
+                    \ControlFlowTok{if}\NormalTok{ termination\_code\_2017 }\OperatorTok{!=} \DecValTok{0}\NormalTok{:}
+                        \CommentTok{\# Suspected merger if not active in 2017}
+\NormalTok{                        merge\_hospitals.append(\{}
+                            \StringTok{\textquotesingle{}FAC\_NAME\textquotesingle{}}\NormalTok{: facility\_name,}
+                            \StringTok{\textquotesingle{}ZIP\_CD\textquotesingle{}}\NormalTok{: zip\_code}
+\NormalTok{                        \})}
+                        \BuiltInTok{print}\NormalTok{(}\StringTok{"Classified as suspected merger.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+                    \ControlFlowTok{else}\NormalTok{:}
+                        \BuiltInTok{print}\NormalTok{(}\StringTok{"Remained active in 2017; not classified as a merger.}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+
+\CommentTok{\# Convert results to DataFrames for inspection}
+\NormalTok{properly\_closed\_hospitals\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(properly\_closed\_hospitals)}
+\NormalTok{merge\_hospitals\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(merge\_hospitals)}
+
+\CommentTok{\# Display results}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Properly closed hospitals:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(properly\_closed\_hospitals\_df)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Hospitals suspected of merger:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(merge\_hospitals\_df)}
+
+\CommentTok{\# Number of properly closed hospitals}
+\NormalTok{num\_properly\_closed }\OperatorTok{=}\NormalTok{ properly\_closed\_hospitals\_df.shape[}\DecValTok{0}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Number of properly closed hospitals: }\SpecialCharTok{\{}\NormalTok{num\_properly\_closed}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\CommentTok{\# Number of suspected mergers}
+\NormalTok{num\_suspected\_mergers }\OperatorTok{=}\NormalTok{ merge\_hospitals\_df.shape[}\DecValTok{0}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Number of suspected mergers: }\SpecialCharTok{\{}\NormalTok{num\_suspected\_mergers}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Processing hospital: GEORGIANA MEDICAL CENTER in ZIP: 36033.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7284   2017              0
+14544  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: RMC JACKSONVILLE in ZIP: 36265.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7365   2017              0
+14625  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: UAB HIGHLANDS in ZIP: 35205.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7314   2017              1
+7382   2017              0
+14574  2018              1
+14642  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: ATMORE COMMUNITY HOSPITAL in ZIP: 36502.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7289   2017              1
+7384   2017              0
+14549  2018              1
+14644  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: NORTH ALABAMA SPECIALITY HOSPITAL in ZIP: 35611.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7387   2017              0
+14647  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: ABRAZO MARYVALE CAMPUS in ZIP: 85031.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7413   2017              1
+14673  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: GILBERT HOSPITAL in ZIP: 85295.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7512   2017              0
+14772  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: FLORENCE HOSPITAL AT ANTHEM, LLC in ZIP: 85132.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7524   2017              0
+14784  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: PACIFIC ALLIANCE MEDICAL CENTER in ZIP: 90012.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7663   2017              0
+14925  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: O'CONNOR HOSPITAL in ZIP: 95128.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7777   2017              0
+15039  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: ADVENTIST MEDICAL CENTER - CENTRAL VALLEY in ZIP: 93230.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7809   2017              1
+15071  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: UKIAH VALLEY MEDICAL CENTER in ZIP: 95482.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7887   2017              0
+8009   2017              1
+15271  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: TULARE REGIONAL MEDICAL CENTER in ZIP: 93274.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7926   2017              0
+15188  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: FALLBROOK HOSPITAL DISTRICT in ZIP: 92028.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7983   2017              1
+15245  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: MOTION PICTURE & TELEVISION HOSPITAL in ZIP: 91364.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8057   2017              0
+15319  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: LAKEWOOD REGIONAL MEDICAL CENTER in ZIP: 90712.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7771   2017              1
+8078   2017              0
+15033  2018              1
+15340  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: COMMUNITY HOSPITAL OF LONG BEACH in ZIP: 90804.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8194   2017              0
+15456  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: MONTEREY PARK HOSPITAL in ZIP: 91754.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8087   2017              1
+8203   2017              0
+15349  2018              1
+15465  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: GARFIELD MEDICAL CENTER in ZIP: 91754.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7980   2017              1
+8204   2017              0
+15242  2018              1
+15466  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: GREATER EL MONTE COMMUNITY HOSPITAL in ZIP: 91733.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8102   2017              1
+8205   2017              0
+15364  2018              1
+15467  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: CENTINELA HOSPITAL MEDICAL CENTER in ZIP: 90301.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7844   2017              1
+8206   2017              0
+15106  2018              1
+15468  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: MENLO PARK SURGICAL HOSPITAL in ZIP: 94025.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8174   2017              1
+8221   2017              0
+15436  2018              1
+15483  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: SHERMAN OAKS HOSPITAL in ZIP: 91403.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7742   2017              1
+8222   2017              0
+15004  2018              1
+15484  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: ALVARADO HOSPITAL MEDICAL CENTER in ZIP: 92120.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8079   2017              1
+8224   2017              0
+15341  2018              1
+15486  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: MONTCLAIR HOSPITAL MEDICAL CENTER in ZIP: 91763.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8080   2017              4
+8225   2017              0
+15342  2018              4
+15487  2018              0
+2018 Termination Code: 4
+Classified as properly closed.
+
+Processing hospital: SHASTA REGIONAL MEDICAL CENTER in ZIP: 96001.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8200   2017              1
+8231   2017              0
+15462  2018              1
+15493  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: COAST PLAZA HOSPITAL in ZIP: 90650.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7826   2017              1
+8238   2017              0
+15088  2018              1
+15500  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: SAN LEANDRO HOSPITAL in ZIP: 94578.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7860   2017              1
+8240   2017              0
+15122  2018              1
+15502  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: SONOMA WEST MEDICAL CENTER in ZIP: 95472.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+7945   2017              1
+8247   2017              0
+15207  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: MILFORD HOSPITAL, INC in ZIP: 6460.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8376   2017              0
+15642  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: WEST PALM HOSPITAL in ZIP: 33407.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8611   2017              0
+15877  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: TAMPA COMMUNITY HOSPITAL in ZIP: 33615.0
+Hospital data across years:
+       YEAR  PGM_TRMNTN_CD
+8628  2017              0
+Processing hospital: LANDMARK HOSPITAL OF SOUTHWEST FLORIDA in ZIP: 34108.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8692   2017              1
+15958  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: MIAMI MEDICAL CENTER, THE in ZIP: 33126.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8693   2017              0
+15959  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: HUTCHESON MEDICAL CENTER in ZIP: 30742.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8698   2017              0
+15964  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: TRINITY HOSPITAL OF AUGUSTA in ZIP: 30904.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8729   2017              0
+15995  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: EMORY-ADVENTIST HOSPITAL in ZIP: 30080.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8846   2017              0
+16112  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: CHESTATEE REGIONAL HOSPITAL in ZIP: 30533.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+8850   2017              0
+16116  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: METROSOUTH MEDICAL CENTER in ZIP: 60406.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9083   2017              0
+16350  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: THE HEART HOSPITAL AT DEACONESS GATEWAY LLC in ZIP: 47630.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9388   2017              0
+16655  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: KENTUCKIANA MEDICAL CENTER LLC in ZIP: 47129.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9389   2017              0
+16656  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: FRANCISCAN HEALTH CARMEL in ZIP: 46032.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9395   2017              0
+16662  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: MONROE HOSPITAL in ZIP: 47403.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9377   2017              1
+9396   2017              0
+16644  2018              1
+16663  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: MERCY HOSPITAL-FORT SCOTT in ZIP: 66701.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9583   2017              0
+16850  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: COFFEY COUNTY HOSPITAL in ZIP: 66839.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9614   2017              0
+16881  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: UNIVERSITY OF LOUISVILLE HOSPITAL in ZIP: 40202.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9803   2017              1
+9807   2017              0
+17070  2018              1
+17074  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: CONTINUECARE HOSPITAL AT BAPTIST HEALTH PADUCAH in ZIP: 42003.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9819   2017              4
+17086  2018              4
+2018 Termination Code: 4
+Classified as properly closed.
+
+Processing hospital: LAKEVIEW REGIONAL MEDICAL CENTER in ZIP: 70433.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9944   2017              1
+17211  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: VILLA FELICIANA MEDICAL COMPLEX in ZIP: 70748.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9964   2017              0
+17231  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: WOMEN'S AND CHILDREN'S HOSPITAL in ZIP: 70508.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9961   2017              1
+9970   2017              0
+17228  2018              1
+17237  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: SABINE MEDICAL CENTER in ZIP: 71449.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9857   2017              1
+9983   2017              0
+17124  2018              1
+17250  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: WILLIS KNIGHTON BOSSIER HEALTH CENTER in ZIP: 71111.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10001  2017              0
+17268  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: ST ELIZABETH HOSPITAL in ZIP: 70737.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10007  2017              0
+17274  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: P & S SURGICAL HOSPITAL in ZIP: 71201.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10010  2017              0
+17277  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: LOUISIANA HEART HOSPITAL in ZIP: 70445.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10014  2017              1
+17281  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: LAFAYETTE GENERAL SURGICAL HOSPITAL in ZIP: 70503.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10032  2017              0
+17299  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: DOCTORS HOSPITAL AT DEER CREEK L L C in ZIP: 71446.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10042  2017              0
+17309  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: SOUTH CAMERON MEMORIAL HOSPITAL in ZIP: 70631.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+9849   2017              1
+10049  2017              0
+17116  2018              1
+17316  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: BAYSTATE MARY LANE HOSPITAL in ZIP: 1082.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10199  2017              1
+17466  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: CLINTON HOSPITAL ASSOCIATION in ZIP: 1510.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10205  2017              0
+17472  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: METROWEST MEDICAL CENTER in ZIP: 1701.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10233  2017              1
+10277  2017              0
+17500  2018              1
+17544  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: ST VINCENT HOSPITAL in ZIP: 1608.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10183  2017              1
+10278  2017              0
+17450  2018              1
+17545  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: NANTUCKET COTTAGE HOSPITAL in ZIP: 2554.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10226  2017              1
+10279  2017              0
+17493  2018              1
+17546  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: UNITY HOSPITAL in ZIP: 55432.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10623  2017              1
+17890  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: PHILLIPS EYE INSTITUTE in ZIP: 55404.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10671  2017              0
+17938  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: NORTH OAK REGIONAL MEDICAL CENTER in ZIP: 38668.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10790  2017              0
+18057  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: ALLIANCE LAIRD HOSPITAL in ZIP: 39365.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10821  2017              0
+18088  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: TWIN RIVERS REGIONAL MEDICAL CENTER in ZIP: 63857.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10845  2017              0
+18112  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: SOUTHEAST HEALTH CENTER OF RIPLEY COUNTY in ZIP: 63935.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10900  2017              0
+18167  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: ST ALEXIUS HOSPITAL in ZIP: 63118.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+10919  2017              1
+10995  2017              0
+18186  2018              1
+18262  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: BLACK RIVER COMMUNITY MEDICAL CENTER in ZIP: 63901.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11010  2017              0
+18277  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: CHI HLTH CREIGHTON UNIVERSITY MED CTR-BERGAN MERCY in ZIP: 68131.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11105  2017              0
+18372  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: SIERRA SURGERY HOSPITAL in ZIP: 89703.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11237  2017              0
+18504  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: EASTERN NEW MEXICO MEDICAL CENTER in ZIP: 88201.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11380  2017              0
+11382  2017              1
+18648  2018              0
+18650  2018              1
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: LAKESIDE MEMORIAL HOSPITAL in ZIP: 14420.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11467  2017              0
+18736  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: ST CLARE'S HOSPITAL in ZIP: 12304.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11490  2017              1
+18759  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: ST FRANCIS HOSPITAL in ZIP: 12601.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11491  2017              1
+18760  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: COMMUNITY-GENERAL HOSPITAL OF GREATER SYRACUSE in ZIP: 13215.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11553  2017              0
+18822  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: ALBANY MEDICAL CENTER / SOUTH CLINICAL CAMPUS in ZIP: 12208.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11579  2017              1
+18848  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: SVCMC-ST VINCENT'S CTRS  NY & WEST BRANCHES in ZIP: 10011.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11653  2017              0
+18922  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: LUTHERAN MEDICAL CENTER in ZIP: 11220.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11659  2017              0
+18928  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: SOUTHAMPTON HOSPITAL in ZIP: 11968.0
+Hospital data across years:
+ Empty DataFrame
+Columns: [YEAR, PGM_TRMNTN_CD]
+Index: []
+Processing hospital: ROCKEFELLER UNIVERSITY HOSPITAL in ZIP: 10021.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11699  2017              0
+18968  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: NORTH GENERAL HOSPITAL in ZIP: 10035.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11701  2017              0
+18970  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: TRI-TOWN REGIONAL HEALTHCARE in ZIP: 13838.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11718  2017              0
+18987  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: SANDHILLS REGIONAL MEDICAL CENTER in ZIP: 28345.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11804  2017              0
+19073  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: CENTRAL REGIONAL HOSPITAL in ZIP: 27509.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11831  2017              0
+19100  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: CAROLINAS  CONTINUECARE HOSPITAL AT UNIVERSITY in ZIP: 28217.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11876  2017              1
+19145  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: SUMMA BARBERTON HOSPITAL in ZIP: 44203.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11953  2017              0
+19222  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: GOOD SAMARITAN HOSPITAL in ZIP: 45406.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+11983  2017              0
+19252  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: FLOWER HOSPITAL in ZIP: 43560.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12004  2017              0
+19273  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: EAST OHIO REGIONAL HOSPITAL in ZIP: 43935.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12010  2017              0
+19279  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: AFFINITY MEDICAL CENTER in ZIP: 44646.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12074  2017              0
+19343  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: BELMONT COMMUNITY HOSPITAL in ZIP: 43906.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12076  2017              0
+19345  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: UPPER VALLEY MEDICAL CENTER in ZIP: 45373.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12093  2017              0
+12100  2017              1
+19362  2018              0
+19369  2018              1
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: MERCY HOSPITAL EL RENO in ZIP: 73036.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12192  2017              0
+19461  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: ALLIANCEHEALTH DEACONESS in ZIP: 73112.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12210  2017              0
+19479  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: CRAIG GENERAL HOSPITAL in ZIP: 74301.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12237  2017              1
+19506  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: LATIMER COUNTY GENERAL HOSPITAL in ZIP: 74578.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12240  2017              0
+19509  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: SOUTHWESTERN MEDICAL CENTER in ZIP: 73505.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12259  2017              0
+12323  2017              4
+19528  2018              0
+19592  2018              4
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: PAULS VALLEY HOSPITAL AUTHORITY in ZIP: 73075.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12293  2017              0
+19562  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: LINDSAY MUNICIPAL HOSPITAL in ZIP: 73052.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12223  2017              1
+12345  2017              0
+19492  2018              1
+19614  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: PINNACLE SPECIALTY HOSPITAL in ZIP: 74137.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12362  2017              0
+19631  2018              3
+2018 Termination Code: 3
+Classified as properly closed.
+
+Processing hospital: BRADFORD REGIONAL MEDICAL CENTER in ZIP: 16701.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12558  2017              0
+19828  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: LEHIGH VALLEY HOSPITAL in ZIP: 18105.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12571  2017              0
+12670  2017              1
+19841  2018              0
+19940  2018              1
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: LEHIGH VALLEY HOSPITAL - MUHLENBERG in ZIP: 18017.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12672  2017              0
+19942  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: HAHNEMANN UNIVERSITY HOSPITAL in ZIP: 19102.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12497  2017              4
+12695  2017              0
+19767  2018              4
+19965  2018              0
+2018 Termination Code: 4
+Classified as properly closed.
+
+Processing hospital: BARIX CLINICS OF PENNSYLVANIA in ZIP: 19047.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12707  2017              0
+19977  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: ROXBOROUGH MEMORIAL HOSPITAL in ZIP: 19128.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12572  2017              4
+12709  2017              0
+19842  2018              4
+19979  2018              0
+2018 Termination Code: 4
+Classified as properly closed.
+
+Processing hospital: SANTA ROSA CLINIC in ZIP: 785.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12744  2017              4
+20015  2018              4
+2018 Termination Code: 4
+Classified as properly closed.
+
+Processing hospital: LAFAYETTE HOSPITAL in ZIP: 714.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12760  2017              1
+20031  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: HOSPITAL SAN GERARDO in ZIP: 928.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12798  2017              1
+20069  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: MEMORIAL HOSPITAL OF RHODE ISLAND in ZIP: 2860.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12809  2017              0
+20082  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: MARY BLACK HEALTH SYSTEM SPARTANBURG in ZIP: 29307.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12888  2017              0
+20161  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: PHS INDIAN HOSPITAL AT RAPID CITY - SIOUX SAN in ZIP: 57702.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12971  2017              0
+20244  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: DAKOTA PLAINS SURGICAL CENTER LLP in ZIP: 57401.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12981  2017              1
+20254  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: LEWIS AND CLARK SPECIALTY HOSPITAL in ZIP: 57078.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+12985  2017              1
+20258  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: LAKEWAY REGIONAL HOSPITAL in ZIP: 37814.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13041  2017              0
+20314  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: MCKENZIE REGIONAL HOSPITAL in ZIP: 38201.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13118  2017              0
+20391  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: TENNOVA HEALTHCARE-REGIONAL JACKSON in ZIP: 38305.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13125  2017              0
+20398  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: CHILDREN'S HOSPITAL -SCOTT & WHITE HEALTHCARE in ZIP: 76502.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13169  2017              1
+20442  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: HAMLIN MEMORIAL HOSPITAL in ZIP: 79520.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13348  2017              0
+20621  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: BAYLOR SCOTT & WHITE MEDICAL CENTER GARLAND in ZIP: 75042.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13369  2017              0
+20642  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: STAMFORD MEMORIAL HOSPITAL in ZIP: 79553.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13385  2017              0
+20658  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: CARE REGIONAL MEDICAL CENTER in ZIP: 78336.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13543  2017              0
+20816  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: EAST TEXAS MEDICAL CENTER TRINITY in ZIP: 75862.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13659  2017              1
+20932  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: HAMILTON GENERAL HOSPITAL in ZIP: 76531.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13411  2017              1
+13664  2017              0
+20684  2018              1
+20937  2018              0
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: UT SOUTHWESTERN UNIVERSITY HOSPITAL-ZALE LIPSHY in ZIP: 75390.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13675  2017              0
+20948  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: EL PASO SPECIALTY HOSPITAL in ZIP: 79902.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13749  2017              0
+21022  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: PINE CREEK MEDICAL CENTER LLP in ZIP: 75235.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+13798  2017              0
+21071  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: WALLA WALLA GENERAL HOSPITAL in ZIP: 99362.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14028  2017              0
+21301  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: OHIO VALLEY MEDICAL CENTER in ZIP: 26003.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14142  2017              0
+21416  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: COLUMBIA CENTER in ZIP: 53097.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14337  2017              0
+21611  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: WHEATON FRANCISCAN HEALTHCARE FRANKLIN in ZIP: 53132.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14346  2017              0
+21620  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: MOUNTAIN VIEW REGIONAL HOSPITAL in ZIP: 82605.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14380  2017              0
+21654  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: UNIVERSITY GENERAL HOSPITAL in ZIP: 77054.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14405  2017              1
+21679  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: NORTH CYPRESS MEDICAL CENTER in ZIP: 77429.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14410  2017              0
+21684  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: LAKEWAY REGIONAL MEDICAL CENTER, LLC in ZIP: 78734.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14462  2017              1
+21736  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: BAYLOR SCOTT & WHITE EMERGENCY MEDICAL CENTER AT C in ZIP: 78613.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14469  2017              0
+21743  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: NIX COMMUNITY GENERAL HOSPITAL in ZIP: 78017.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14471  2017              1
+21745  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: WALNUT HILL MEDICAL CENTER in ZIP: 75231.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14474  2017              1
+21748  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: LITTLE RIVER HEALTHCARE CAMERON HOSPITAL in ZIP: 76520.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14476  2017              0
+21750  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: BAY AREA REGIONAL MEDICAL CENTER, LLC in ZIP: 77598.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14478  2017              0
+21752  2018              1
+2018 Termination Code: 1
+Classified as properly closed.
+
+Processing hospital: BAYLOR EMERGENCY MEDICAL CENTER in ZIP: 75087.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14479  2017              0
+21753  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Processing hospital: TEXAS GENERAL HOSPITAL- VZRMC LP in ZIP: 75140.0
+Hospital data across years:
+        YEAR  PGM_TRMNTN_CD
+14499  2017              0
+21773  2018              0
+2018 Termination Code: 0
+2017 Termination Code: 0
+Remained active in 2017; not classified as a merger.
+
+Properly closed hospitals:
+                                 FAC_NAME   ZIP_CD
+0                        RMC JACKSONVILLE  36265.0
+1                           UAB HIGHLANDS  35205.0
+2               ATMORE COMMUNITY HOSPITAL  36502.0
+3       NORTH ALABAMA SPECIALITY HOSPITAL  35611.0
+4                  ABRAZO MARYVALE CAMPUS  85031.0
+..                                    ...      ...
+89           NORTH CYPRESS MEDICAL CENTER  77429.0
+90   LAKEWAY REGIONAL MEDICAL CENTER, LLC  78734.0
+91         NIX COMMUNITY GENERAL HOSPITAL  78017.0
+92             WALNUT HILL MEDICAL CENTER  75231.0
+93  BAY AREA REGIONAL MEDICAL CENTER, LLC  77598.0
+
+[94 rows x 2 columns]
+
+Hospitals suspected of merger:
+Empty DataFrame
+Columns: []
+Index: []
+Number of properly closed hospitals: 94
+Number of suspected mergers: 0
+\end{verbatim}
+
+\begin{verbatim}
+b.
+c.
+\end{verbatim}
+
+\subsection{Download Census zip code shapefile (10
+pt)}\label{download-census-zip-code-shapefile-10-pt}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+  \item
+  \end{enumerate}
+\item
+\end{enumerate}
+
+\subsection{Calculate zip code's distance to the nearest hospital (20
+pts)
+(*)}\label{calculate-zip-codes-distance-to-the-nearest-hospital-20-pts}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+\item
+\item
+\item
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+  \item
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+  \item
+  \item
+  \end{enumerate}
+\end{enumerate}
+
+\subsection{Effects of closures on access in Texas (15
+pts)}\label{effects-of-closures-on-access-in-texas-15-pts}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+\item
+\item
+\item
+\end{enumerate}
+
+\subsection{Reflecting on the exercise (10
+pts)}\label{reflecting-on-the-exercise-10-pts}
+
+
+
+
+\end{document}
