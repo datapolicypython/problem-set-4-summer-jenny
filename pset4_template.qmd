@@ -89,9 +89,14 @@ import pandas as pd
 import geopandas as gpd
 import shapely
 import altair as alt
+import sys
+import pyproj
+import os
+from pyproj import CRS, Transformer
 
-path2016 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2016.csv'
-pos2016 = pd.read_csv(path2016)
+os.chdir('/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/')
+
+pos2016 = pd.read_csv('pos2016.csv')
 
 pos2016.head(10)
 ```
@@ -126,10 +131,7 @@ print(st_hospitals2016)
 for 2017: 
 ```{python}
 #importing pos2017
-
-path2017 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2017.csv'
-
-pos2017 = pd.read_csv(path2017, encoding='latin1')
+pos2017 = pd.read_csv('pos2017.csv', encoding='latin1')
 ```
 
 ```{python}
@@ -153,17 +155,14 @@ Adding the 2017 column
 ```{python}
 st_hospitals2017.loc[:, 'YEAR'] = 2017
 
-print(st_hospitals2017)
+print(st_hospitals2017.head())
 ```
-
 
 for 2018: 
 ```{python}
 #importing pos2018
 
-path2018 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2018.csv'
-
-pos2018 = pd.read_csv(path2018,encoding='latin1')
+pos2018 = pd.read_csv('pos2018.csv',encoding='latin1')
 ```
 
 ```{python}
@@ -171,15 +170,15 @@ pos2018 = pd.read_csv(path2018,encoding='latin1')
 pos2018['PRVDR_CTGRY_SBTYP_CD'] = pos2018['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)
 
 pos2018['PRVDR_CTGRY_CD'] = pos2018['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)
-pos2018.head()
+pos2018.head(5)
 ```
 
 ```{python}
 #then focus on st hospitals 
 st_hospitals2018 = pos2018[(pos2018['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2018['PRVDR_CTGRY_CD'] == '01')]
 
-print(st_hospitals2018.head())
-print(st_hospitals2018.tail())
+print(st_hospitals2018.head(5))
+print(st_hospitals2018.tail(5))
 st_hospitals2018.shape
 ```
 
@@ -188,25 +187,13 @@ Adding the 2018 column
 #column had to be extended
 st_hospitals2018.loc[:, 'YEAR'] = 2018
 
-print(st_hospitals2018)
+print(st_hospitals2018.head(5))
 ```
 
 
 for 2019: 
 ```{python}
-#importing pos2019
-path2019 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2019.csv'
-
-pos2019 = pd.read_csv(path2019, encoding='latin1')
-```
-
-for 2019: 
-```{python}
-#importing pos2019
-
-path2019 = '/Users/jennyzhong/Documents/GitHub/problem-set-4-summer-jenny/pos2019.csv'
-
-pos2019 = pd.read_csv(path2019,encoding='latin1')
+pos2019 = pd.read_csv('pos2019.csv', encoding='latin1')
 ```
 
 ```{python}
@@ -214,15 +201,15 @@ pos2019 = pd.read_csv(path2019,encoding='latin1')
 pos2019['PRVDR_CTGRY_SBTYP_CD'] = pos2019['PRVDR_CTGRY_SBTYP_CD'].astype(str).str.zfill(2)
 
 pos2019['PRVDR_CTGRY_CD'] = pos2019['PRVDR_CTGRY_CD'].astype(str).str.zfill(2)
-pos2019.head()
+pos2019.head(5)
 ```
 
 ```{python}
 #then focus on st hospitals 
 st_hospitals2019 = pos2019[(pos2019['PRVDR_CTGRY_SBTYP_CD'] == '1.0') & (pos2019['PRVDR_CTGRY_CD'] == '01')]
 
-print(st_hospitals2019.head())
-print(st_hospitals2019.tail())
+print(st_hospitals2019.head(5))
+print(st_hospitals2019.tail(5))
 st_hospitals2019.shape
 ```
 
@@ -283,9 +270,119 @@ b. The number of unique hospitals and total observations charts are identical, w
 ## Download Census zip code shapefile (10 pt) 
 
 1. 
-    a.
+    a. There are five types of file types here. 
+**.shp (shape file)**: file contains the geometric shapes. It stores the spatial coordinates and shapes of objects like points, lines or polygons. 
+**.shx (shape index format)**: file is an index of the geometry in the .shp file, and provides quick access to the geometric shapes. 
+**.dbf (attribute format)**: file contains attribute data in tabular format, with each row corresponding to a feature and each column containing attributes associated with that feature. 
+**.prj (projection format)**: file contains information about the coordinate sysetm and projection, and defines how shapes are mapped onto Earth's surface. 
+**.xml (metadata format)**: file contains metadata, contains descriptive information about dataset such as source, creation date, projection dates. 
+
     b. 
+| File Extension | Size (MB)  |
+|----------------|------------|
+| .shp           | 837.5      |
+| .dbf           | 6.4        |
+| .prj           | 0.000165   |
+| .shx           | 0.000265   |
+| .xml           | 0.016      |
+
 2. 
+
+```{python}
+import geopandas as gpd
+
+```
+
+2. 
+```{python}
+shapefile_path = './gz_2010_us_860_00_500k/gz_2010_us_860_00_500k.shp'
+
+try:
+    zip_shapes = gpd.read_file(shapefile_path)
+    print("Shapefile loaded successfully with SHX restoration.")
+except Exception as e:
+    print("Error loading shapefile:", e)
+```
+
+```{python}
+#filtering for texas zip codes
+texas_zip_shapes = zip_shapes[zip_shapes['ZCTA5'].astype(str).str.startswith(('75', '76', '77', '78', '79')) | (zip_shapes['ZCTA5'] == '733')]
+
+print(texas_zip_shapes.head())
+print("Number of Texas ZIP codes:", texas_zip_shapes.shape[0])
+```
+
+```{python}
+#pos2016 
+pos2016['ZIP_CD'] = pos2016['ZIP_CD'].astype(str)
+
+texas_hospitals_2016 = pos2016[pos2016['ZIP_CD'].str.startswith(('75', '76', '77', '78', '79')) | (pos2016['ZIP_CD'] == '733')]
+
+print(texas_hospitals_2016.head())
+print("Number of Texas hospital records in 2016:", texas_hospitals_2016.shape[0])
+```
+
+```{python}
+#counting the number of hospitals per ZIP code:
+hospitals_per_zip = texas_hospitals_2016.groupby('ZIP_CD').size().reset_index(name='hospital_count')
+```
+
+```{python}
+#merging for chloropleth mapping
+texas_zip_shapes.loc[:, 'ZCTA5'] = texas_zip_shapes['ZCTA5'].astype(str)
+hospitals_per_zip['ZIP_CD'] = hospitals_per_zip['ZIP_CD'].astype(str)
+
+# convert ZIP_CD to integer, then to string with zero-padding to ensure 5-digit format
+hospitals_per_zip['ZIP_CD'] = hospitals_per_zip['ZIP_CD'].astype(float).astype(int).astype(str).str.zfill(5)
+
+# re-check the formatting
+print("Formatted ZIP codes in hospitals_per_zip:", hospitals_per_zip['ZIP_CD'].unique()[:10])
+
+# now, re-run the merge
+texas_zip_shapes = texas_zip_shapes.merge(hospitals_per_zip, left_on='ZCTA5', right_on='ZIP_CD', how='left')
+
+# fill NaN values in 'hospital_count' with 0 for ZIP codes with no hospitals
+texas_zip_shapes['hospital_count'] = texas_zip_shapes['hospital_count'].fillna(0)
+
+# Verify the number of common ZIP codes and non-zero hospital counts
+print("Number of ZIP codes with hospital_count as 0:", (texas_zip_shapes['hospital_count'] == 0).sum())
+print("Total ZIP codes in Texas:", texas_zip_shapes.shape[0])
+print(texas_zip_shapes[['ZCTA5', 'hospital_count']].head(10))
+
+```
+
+```{python}
+# Adjust the merge by specifying suffixes to handle duplicate columns
+texas_zip_shapes = texas_zip_shapes.merge(
+    hospitals_per_zip, 
+    left_on='ZCTA5', 
+    right_on='ZIP_CD', 
+    how='left', 
+    suffixes=('', '_y')  # Prevents '_x' and '_y' conflicts
+)
+
+# Drop any unnecessary duplicate columns that may arise
+texas_zip_shapes = texas_zip_shapes.drop(columns=['ZIP_CD_y'], errors='ignore')
+
+# Fill NaN values in 'hospital_count' with 0 for ZIP codes with no hospitals
+texas_zip_shapes['hospital_count'] = texas_zip_shapes['hospital_count'].fillna(0)
+
+# Verify the result
+print("Number of ZIP codes with hospital_count as 0:", (texas_zip_shapes['hospital_count'] == 0).sum())
+print("Total ZIP codes in Texas:", texas_zip_shapes.shape[0])
+print(texas_zip_shapes[['ZCTA5', 'hospital_count']].head(10))
+```
+
+```{python}
+
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(1, 1, figsize=(12, 10))
+texas_zip_shapes.plot(column='hospital_count', cmap='OrRd', linewidth=0.8, ax=ax, edgecolor='0.8', legend=True)
+ax.set_title("Number of Hospitals per ZIP Code in Texas (2016)")
+ax.set_axis_off()
+plt.show()
+```
 
 ## Calculate zip code’s distance to the nearest hospital (20 pts) (*)
 
