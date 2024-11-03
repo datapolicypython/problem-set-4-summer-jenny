@@ -384,7 +384,6 @@ ax.set_axis_off()
 plt.show()
 ```
 
-
 ## Calculate zip code’s distance to the nearest hospital (20 pts) (*)
 
 1. 
@@ -399,10 +398,87 @@ plt.show()
     c.
     
 ## Effects of closures on access in Texas (15 pts)
+1. There are 20 hospitals that have had at least one closure between 2016-2019.
+```{python}
+corrected_closures_df = pd.DataFrame(properly_closed_hospitals)
 
-1. 
-2. 
+corrected_closures_df['ZIP_CD'] = corrected_closures_df['ZIP_CD'].astype(str)
+```
+
+```{python}
+texas_closures = corrected_closures_df[corrected_closures_df['ZIP_CD'].str.startswith(('75', '76', '77', '78', '79', '733'))]
+```
+
+```{python}
+closures_by_zip = texas_closures.groupby('ZIP_CD').size().reset_index(name='closure_count')
+```
+
+```{python}
+print("Number of hospital closures by ZIP code in Texas (2016-2019):")
+print(closures_by_zip)
+```
+
+2.  
+```{python}
+print(texas_zip_shapes.columns)
+print(corrected_closures_df.columns)
+```
+
+```{python}
+closures_by_zip = corrected_closures_df.groupby('ZIP_CD').size().reset_index(name='closure_count')
+
+texas_zip_shapes = texas_zip_shapes.drop(columns=['closure_count_x', 'closure_count_y'], errors='ignore')
+
+texas_zip_shapes = texas_zip_shapes.merge(closures_by_zip, on='ZIP_CD', how='left', suffixes=('', '_closure'))
+
+texas_zip_shapes['closure_count'] = texas_zip_shapes['closure_count'].fillna(0)
+
+print(texas_zip_shapes.columns)
+print(texas_zip_shapes[['ZIP_CD', 'closure_count']].head())
+```
+
+```{python}
+print(len(texas_zip_shapes))
+```
+
 3. 
+```{python}
+affected_zip_codes = affected_zip_codes[affected_zip_codes['geometry'].notnull()]
+
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(1, 1, figsize=(12, 10))
+affected_zip_codes.plot(column='closure_count', cmap='OrRd', linewidth=0.8, ax=ax, edgecolor='0.8', legend=True)
+ax.set_title("Texas ZIP Codes Directly Affected by Hospital Closures (2016-2019)")
+ax.set_axis_off()
+plt.show()
+```
+
 4. 
+```{python}
+texas_zip_shapes['affected_status'] = 'Not Affected' 
+directly_affected = texas_zip_shapes[texas_zip_shapes['closure_count'] > 0]
+texas_zip_shapes.loc[texas_zip_shapes['closure_count'] > 0, 'affected_status'] = 'Directly Affected'
+
+texas_zip_shapes = texas_zip_shapes.to_crs(epsg=5070)
+directly_affected = directly_affected.to_crs(epsg=5070)
+
+buffer_10_miles = directly_affected.buffer(16093.4).unary_union 
+
+within_10_miles = texas_zip_shapes[texas_zip_shapes['geometry'].intersects(buffer_10_miles) & (texas_zip_shapes['affected_status'] == 'Not Affected')]
+texas_zip_shapes.loc[within_10_miles.index, 'affected_status'] = 'Within 10 Miles of Closure'
+
+fig, ax = plt.subplots(1, 1, figsize=(12, 10))
+texas_zip_shapes.plot(column='affected_status', cmap='Set1', linewidth=0.8, ax=ax, edgecolor='0.8', legend=True)
+ax.set_title("Texas ZIP Codes by Closure Impact (2016-2019)")
+ax.set_axis_off()
+plt.show()
+```
 
 ## Reflecting on the exercise (10 pts) 
+Partner 1: 
+The “first-pass” method for identifying hospital closures has limitations that could lead to inaccuracies. Capturing data only annually risks misidentifying closures, as hospitals that close and reopen within a year may still appear as closed. More frequent data collection (e.g., monthly) and cross-referencing with reliable healthcare databases like CMS or Medicare could improve accuracy. Additionally, hospitals that merge or reclassify, such as converting to outpatient centers, may seem closed but still offer services; tracking such changes would help clarify true closures. Finally, factoring in geographical and demographic differences, especially between urban and rural areas, would provide a more realistic view of how closures impact access, better reflecting actual community needs.
+
+Partner 2: 
+Identifying affected ZIP codes by proximity to closures is helpful but might not fully reflect changes in hospital accessibility. ZIP codes vary in size and infrastructure, making it overly simplistic to define access by ZIP code alone. Using real travel distances or public transit times would better capture access limitations. Additionally, hospital closures impact communities differently depending on the services provided—an emergency center’s closure has a greater effect on access than a specialized facility. Finally, rural areas often rely on a single hospital, unlike urban areas with multiple options within a short distance. Adjusting thresholds for rural and urban settings could improve the measure’s accuracy.
+
